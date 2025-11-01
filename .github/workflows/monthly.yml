@@ -61,5 +61,5 @@ jobs:
   deploy:
     name: "☁️"
     needs: [run-monthly-tasks]
-    uses: krimlabs/state-of-being/.github/workflows/cd.yml@master
+    uses: shivekkhurana/state-of-being/.github/workflows/cd.yml@master
     secrets: inherit

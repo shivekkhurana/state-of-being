@@ -53,5 +53,5 @@ jobs:
       - uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.TRIGGER_KRIMLABS_DOT_COM_BUILD_TOKEN}}
-          repository: krimlabs/krimlabs.com
+          repository: shivekkhurana/shivekkhurana.com
           event-type: DEPLOY_WEBSITE
