@@ -11,12 +11,12 @@ const HeartRateDataSchema = z.object({
   Min: z.number().optional(),
   source: z.string().optional(),
   date: z.string(),
-});
+}).passthrough();
 
 const HeartRateVariabilityDataSchema = z.object({
   qty: z.number(),
   date: z.string(),
-});
+}).passthrough();
 
 const SleepAnalysisDataSchema = z.object({
   inBedStart: z.string().optional(),
@@ -32,12 +32,12 @@ const SleepAnalysisDataSchema = z.object({
   inBed: z.number().optional(),
   core: z.number().optional(),
   asleep: z.number().optional(),
-});
+}).passthrough();
 
 const BodyTemperatureDataSchema = z.object({
   date: z.string(),
   qty: z.number(),
-});
+}).passthrough();
 
 // Union type for all health metric data (no name discriminator on data items)
 const HealthMetricDataSchema = z.union([
@@ -241,20 +241,86 @@ function getItemIdentifier(item: HealthMetricData): string {
 }
 
 /**
- * Filters out duplicate metric entries based on date
+ * Checks if a sleep entry is incomplete (only has source and date)
+ */
+function isIncompleteSleepEntry(item: HealthMetricData): boolean {
+  if ('source' in item && 'date' in item) {
+    // Check if it's a sleep entry by looking for sleep-specific fields
+    const hasSleepFields = 'totalSleep' in item || 'inBedStart' in item || 'sleepStart' in item;
+    // If it has source and date but no sleep-specific fields, it's incomplete
+    if (!hasSleepFields) {
+      const keys = Object.keys(item);
+      // An incomplete entry should only have source and date (2 keys)
+      return keys.length === 2;
+    }
+  }
+  return false;
+}
+
+/**
+ * Filters out duplicate metric entries based on date.
+ * Also removes incomplete entries from existing data when complete entries are available.
  */
 export function deduplicateMetrics(
   existingMetrics: HealthMetricData[],
   newMetrics: HealthMetricData[]
-): HealthMetricData[] {
+): {
+  filteredNewMetrics: HealthMetricData[];
+  filteredExistingMetrics: HealthMetricData[];
+} {
+  // Create a map of new metric dates to their data
+  const newMetricsByDate = new Map<string, HealthMetricData[]>();
+  for (const item of newMetrics) {
+    const date = item.date;
+    if (date) {
+      if (!newMetricsByDate.has(date)) {
+        newMetricsByDate.set(date, []);
+      }
+      newMetricsByDate.get(date)!.push(item);
+    }
+  }
+
+  // Filter out incomplete entries from existing data if we have complete entries for the same date
+  const filteredExistingMetrics = existingMetrics.filter((existing) => {
+    const date = existing.date;
+    if (!date) return true; // Keep entries without dates
+    
+    // Check if we have new metrics for this date
+    const newMetricsForDate = newMetricsByDate.get(date);
+    if (!newMetricsForDate || newMetricsForDate.length === 0) {
+      return true; // No new data for this date, keep existing
+    }
+
+    // Check if the existing entry is incomplete
+    if (isIncompleteSleepEntry(existing)) {
+      // We have new data for this date, remove the incomplete entry
+      return false;
+    }
+
+    // Existing entry is complete, check if any new entry has the same identifier
+    const existingIdentifier = getItemIdentifier(existing);
+    const hasDuplicate = newMetricsForDate.some(
+      (newItem) => getItemIdentifier(newItem) === existingIdentifier
+    );
+    
+    // Remove if there's a duplicate (same date and identifier)
+    return !hasDuplicate;
+  });
+
+  // Now filter new metrics against the cleaned existing metrics
   const existingIdentifiers = new Set(
-    existingMetrics.map((m) => getItemIdentifier(m))
+    filteredExistingMetrics.map((m) => getItemIdentifier(m))
   );
 
-  return newMetrics.filter((item) => {
+  const filteredNewMetrics = newMetrics.filter((item) => {
     const itemIdentifier = getItemIdentifier(item);
     return !existingIdentifiers.has(itemIdentifier);
   });
+
+  return {
+    filteredNewMetrics,
+    filteredExistingMetrics,
+  };
 }
 
 /**
@@ -287,26 +353,35 @@ export async function processMetric(
 
   const validatedMetric = validationResult.data;
   const existingData = await readExistingData(filePath, reader);
-  const newMetrics = deduplicateMetrics(existingData.metrics, validatedMetric.data);
+  const { filteredNewMetrics, filteredExistingMetrics } = deduplicateMetrics(
+    existingData.metrics,
+    validatedMetric.data
+  );
 
-  if (newMetrics.length === 0) {
+  if (filteredNewMetrics.length === 0) {
     return {
       success: true,
       message: `No new data for ${validatedMetric.name} (already ingested)`,
     };
   }
 
-  // Merge with existing data
+  // Merge with existing data (which may have been cleaned of incomplete entries)
   const mergedData: HealthDataFile = {
-    metrics: [...existingData.metrics, ...newMetrics],
+    metrics: [...filteredExistingMetrics, ...filteredNewMetrics],
   };
 
   const contentToWrite = JSON.stringify(mergedData, null, 2);
   await writer(filePath, contentToWrite);
 
+  const incompleteReplaced = existingData.metrics.length - filteredExistingMetrics.length;
+  let message = `Saved ${filteredNewMetrics.length} new entries for ${validatedMetric.name} to ${getMetricFilePath(validatedMetric.name, basePath)?.split("/").pop()}`;
+  if (incompleteReplaced > 0) {
+    message += ` (replaced ${incompleteReplaced} incomplete ${incompleteReplaced === 1 ? 'entry' : 'entries'})`;
+  }
+
   return {
     success: true,
-    message: `Saved ${newMetrics.length} new entries for ${validatedMetric.name} to ${getMetricFilePath(validatedMetric.name, basePath)?.split("/").pop()}`,
+    message,
   };
 }
 
