@@ -11,6 +11,7 @@ permissions:
 jobs:
   process-issue:
     name: "👷 Process issue"
+    if: github.event.issue.title == 'healthDataExport'
     runs-on: ubuntu-latest
     steps:
       - name: "📦 Checkout"
