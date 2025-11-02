@@ -366,8 +366,17 @@ export async function processMetric(
   }
 
   // Merge with existing data (which may have been cleaned of incomplete entries)
+  const mergedMetrics = [...filteredExistingMetrics, ...filteredNewMetrics];
+  
+  // Sort by date in ascending order for clean commits
+  const sortedMetrics = mergedMetrics.sort((a, b) => {
+    const dateA = a.date || '';
+    const dateB = b.date || '';
+    return dateA.localeCompare(dateB);
+  });
+
   const mergedData: HealthDataFile = {
-    metrics: [...filteredExistingMetrics, ...filteredNewMetrics],
+    metrics: sortedMetrics,
   };
 
   const contentToWrite = JSON.stringify(mergedData, null, 2);
@@ -540,5 +549,65 @@ export async function ingestHealthDataFromExport(
   return {
     success: true,
     message: `Successfully ingested health data:\n${messageParts.join("\n")}`,
+  };
+}
+
+/**
+ * Sorts all existing healthkit files by date in ascending order
+ * This ensures all files are in chronological order for clean commits
+ */
+export async function sortAllHealthkitFiles(
+  writer: WriterFunction,
+  reader: ReaderFunction,
+  basePath: string = "./vault/healthkit"
+): Promise<{ success: boolean; message: string }> {
+  const results: string[] = [];
+  const errors: string[] = [];
+
+  // Process each known metric file
+  for (const [metricName, fileName] of Object.entries(METRIC_TO_FILE_MAP)) {
+    try {
+      const filePath = `${basePath}/${fileName}`;
+      
+      // Try to read existing data
+      const existingData = await readExistingData(filePath, reader);
+      
+      if (existingData.metrics.length === 0) {
+        results.push(`No data to sort in ${fileName}`);
+        continue;
+      }
+
+      // Sort by date in ascending order
+      const sortedMetrics = existingData.metrics.sort((a, b) => {
+        const dateA = a.date || '';
+        const dateB = b.date || '';
+        return dateA.localeCompare(dateB);
+      });
+
+      // Write back the sorted data
+      const sortedData: HealthDataFile = {
+        metrics: sortedMetrics,
+      };
+
+      const contentToWrite = JSON.stringify(sortedData, null, 2);
+      await writer(filePath, contentToWrite);
+      
+      results.push(`Sorted ${sortedMetrics.length} entries in ${fileName}`);
+    } catch (error) {
+      const errorMsg = `Error sorting ${fileName}: ${error instanceof Error ? error.message : String(error)}`;
+      errors.push(errorMsg);
+    }
+  }
+
+  if (errors.length > 0) {
+    return {
+      success: false,
+      message: `Errors occurred: ${errors.join("; ")}\n${results.join("\n")}`,
+    };
+  }
+
+  return {
+    success: true,
+    message: `Successfully sorted all healthkit files:\n${results.join("\n")}`,
   };
 }
