@@ -6,6 +6,7 @@ on:
 
 permissions:
   issues: write
+  contents: write
 
 jobs:
   process-issue:
@@ -35,4 +36,14 @@ jobs:
             --issue-body "$ISSUE_BODY" \
             --issue-author "${{ github.event.issue.user.login }}" \
             --issue-created-at "${{ github.event.issue.created_at }}"
+
+      - name: "🗄️ Commit vault back to repo"
+        if: success()
+        uses: stefanzweifel/git-auto-commit-action@v4.15.4
+        with:
+          commit_message: "🤖 Save health data to vault"
+          commit_user_name: "0x4444"
+          commit_user_email: "0x4444@users.noreply.github.com"
+          commit_author: "0x4444 <0x4444@users.noreply.github.com>"
+          file_pattern: "vault/healthkit/*"
 
