@@ -198,7 +198,7 @@ describe("ingestHealthDataFromIssue", () => {
     expect(commentsPosted[0]).toContain("✅");
   });
 
-  it("should save issue creation timestamp in data", async () => {
+  it("should not save issue creation timestamp in data", async () => {
     const issueWithTimestamp: HealthDataIssue = {
       ...sampleHealthDataIssue,
       createdAt: "2025-10-27T10:00:00Z",
@@ -212,14 +212,14 @@ describe("ingestHealthDataFromIssue", () => {
       "./test-vault/healthkit"
     );
 
-    // Verify timestamp is saved in all files
+    // Verify timestamp is NOT saved in files (each data point has its own date)
     const hrContent = writtenFiles.get("./test-vault/healthkit/hr.json");
     const hrData = JSON.parse(hrContent!);
-    expect(hrData.issueCreatedAt).toBe("2025-10-27T10:00:00Z");
+    expect(hrData.issueCreatedAt).toBeUndefined();
 
     const hrvContent = writtenFiles.get("./test-vault/healthkit/hrv.json");
     const hrvData = JSON.parse(hrvContent!);
-    expect(hrvData.issueCreatedAt).toBe("2025-10-27T10:00:00Z");
+    expect(hrvData.issueCreatedAt).toBeUndefined();
   });
 
   it("should be idempotent - not duplicate data when called twice", async () => {

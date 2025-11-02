@@ -102,7 +102,6 @@ const HealthDataFileSchema = z.object({
       BodyTemperatureDataSchema,
     ])
   ),
-  issueCreatedAt: z.string().optional(),
 });
 
 const HealthDataIssueSchema = z.object({
@@ -263,7 +262,6 @@ export function deduplicateMetrics(
  */
 export async function processMetric(
   metric: any, // Lenient type - can be any metric structure
-  issueCreatedAt: string | undefined,
   basePath: string,
   writer: WriterFunction,
   reader: ReaderFunction
@@ -298,10 +296,9 @@ export async function processMetric(
     };
   }
 
-  // Merge with existing data and add issue creation timestamp
+  // Merge with existing data
   const mergedData: HealthDataFile = {
     metrics: [...existingData.metrics, ...newMetrics],
-    issueCreatedAt: issueCreatedAt || existingData.issueCreatedAt,
   };
 
   const contentToWrite = JSON.stringify(mergedData, null, 2);
@@ -357,7 +354,6 @@ export async function ingestHealthDataFromIssue(
     try {
       const result = await processMetric(
         metric,
-        issue.createdAt,
         basePath,
         writer,
         reader
