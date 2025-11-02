@@ -307,23 +307,8 @@ function reorderKeysBySchema<T extends Record<string, any>>(
 }
 
 /**
- * Checks if a sleep entry is incomplete (only has source and date)
- * An incomplete entry lacks the totalSleep field or other essential sleep data
- */
-function isIncompleteSleepEntry(item: HealthMetricData): boolean {
-  const sleepValidation = SleepAnalysisDataSchema.safeParse(item);
-  if (!sleepValidation.success) {
-    return false; // Not a sleep entry
-  }
-  
-  const parsed = sleepValidation.data;
-  // Incomplete entry lacks totalSleep (the key indicator of actual sleep data)
-  return !parsed.totalSleep;
-}
-
-/**
  * Filters out duplicate metric entries based on date.
- * Also removes incomplete entries from existing data when complete entries are available.
+ * Always keeps new metrics and removes existing ones for the same date.
  */
 export function deduplicateMetrics(
   existingMetrics: HealthMetricData[],
@@ -332,57 +317,17 @@ export function deduplicateMetrics(
   filteredNewMetrics: HealthMetricData[];
   filteredExistingMetrics: HealthMetricData[];
 } {
-  // Create a map of new metric dates to their data
-  const newMetricsByDate = new Map<string, HealthMetricData[]>();
-  for (const item of newMetrics) {
-    const date = item.date;
-    if (date) {
-      if (!newMetricsByDate.has(date)) {
-        newMetricsByDate.set(date, []);
-      }
-      newMetricsByDate.get(date)!.push(item);
-    }
-  }
+  // Create a set of dates from new metrics
+  const newMetricDates = new Set(newMetrics.map((item) => item.date));
 
-  // Filter out incomplete entries from existing data if we have complete entries for the same date
-  const filteredExistingMetrics = existingMetrics.filter((existing) => {
-    const date = existing.date;
-    if (!date) return true; // Keep entries without dates
-    
-    // Check if we have new metrics for this date
-    const newMetricsForDate = newMetricsByDate.get(date);
-    if (!newMetricsForDate || newMetricsForDate.length === 0) {
-      return true; // No new data for this date, keep existing
-    }
-
-    // Check if the existing entry is incomplete
-    if (isIncompleteSleepEntry(existing)) {
-      // We have new data for this date, remove the incomplete entry
-      return false;
-    }
-
-    // Existing entry is complete, check if any new entry has the same identifier
-    const existingIdentifier = getItemIdentifier(existing);
-    const hasDuplicate = newMetricsForDate.some(
-      (newItem) => getItemIdentifier(newItem) === existingIdentifier
-    );
-    
-    // Remove if there's a duplicate (same date and identifier)
-    return !hasDuplicate;
-  });
-
-  // Now filter new metrics against the cleaned existing metrics
-  const existingIdentifiers = new Set(
-    filteredExistingMetrics.map((m) => getItemIdentifier(m))
+  // Keep only existing metrics that don't have a date matching any new metric
+  const filteredExistingMetrics = existingMetrics.filter(
+    (existing) => !newMetricDates.has(existing.date)
   );
 
-  const filteredNewMetrics = newMetrics.filter((item) => {
-    const itemIdentifier = getItemIdentifier(item);
-    return !existingIdentifiers.has(itemIdentifier);
-  });
-
+  // Always keep all new metrics
   return {
-    filteredNewMetrics,
+    filteredNewMetrics: newMetrics,
     filteredExistingMetrics,
   };
 }
@@ -451,11 +396,7 @@ export async function processMetric(
   const contentToWrite = JSON.stringify(mergedData, null, 2);
   await writer(filePath, contentToWrite);
 
-  const incompleteReplaced = existingData.metrics.length - filteredExistingMetrics.length;
-  let message = `Saved ${filteredNewMetrics.length} new entries for ${validatedMetric.name} to ${getMetricFilePath(validatedMetric.name, basePath)?.split("/").pop()}`;
-  if (incompleteReplaced > 0) {
-    message += ` (replaced ${incompleteReplaced} incomplete ${incompleteReplaced === 1 ? 'entry' : 'entries'})`;
-  }
+  const message = `Saved ${filteredNewMetrics.length} new entries for ${validatedMetric.name} to ${getMetricFilePath(validatedMetric.name, basePath)?.split("/").pop()}`;
 
   return {
     success: true,

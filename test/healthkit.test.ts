@@ -400,4 +400,418 @@ describe("ingestHealthDataFromIssue", () => {
     // Should still write heart_rate
     expect(writtenFiles.has("./test-vault/healthkit/hr.json")).toBe(true);
   });
+
+  it("should overwrite old data with new data for the same date across multiple ingestions", async () => {
+    // First ingestion with initial data
+    const firstIssue: HealthDataIssue = {
+      title: "HealthDataExport",
+      body: JSON.stringify({
+        data: {
+          metrics: [
+            {
+              name: "heart_rate",
+              units: "count/min",
+              data: [
+                {
+                  Max: 90,
+                  Avg: 65,
+                  Min: 50,
+                  source: "Ultrahuman",
+                  date: "2025-10-27 00:00:00 +0530",
+                },
+              ],
+            },
+            {
+              name: "heart_rate_variability",
+              units: "ms",
+              data: [
+                {
+                  qty: 85.0,
+                  date: "2025-10-27 00:00:00 +0530",
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    };
+
+    await ingestHealthDataFromIssue(
+      firstIssue,
+      mockWriter,
+      mockReader,
+      mockCommenter,
+      "./test-vault/healthkit"
+    );
+
+    // Setup mock reader with first ingestion results
+    const hrFirstContent = writtenFiles.get("./test-vault/healthkit/hr.json");
+    const hrvFirstContent = writtenFiles.get("./test-vault/healthkit/hrv.json");
+    if (hrFirstContent) readFiles.set("./test-vault/healthkit/hr.json", hrFirstContent);
+    if (hrvFirstContent) readFiles.set("./test-vault/healthkit/hrv.json", hrvFirstContent);
+
+    // Second ingestion with updated data for the same date
+    const secondIssue: HealthDataIssue = {
+      title: "HealthDataExport",
+      body: JSON.stringify({
+        data: {
+          metrics: [
+            {
+              name: "heart_rate",
+              units: "count/min",
+              data: [
+                {
+                  Max: 100,
+                  Avg: 70,
+                  Min: 55,
+                  source: "Apple Watch",
+                  date: "2025-10-27 00:00:00 +0530", // Same date
+                },
+              ],
+            },
+            {
+              name: "heart_rate_variability",
+              units: "ms",
+              data: [
+                {
+                  qty: 95.5,
+                  date: "2025-10-27 00:00:00 +0530", // Same date
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    };
+
+    await ingestHealthDataFromIssue(
+      secondIssue,
+      mockWriter,
+      mockReader,
+      mockCommenter,
+      "./test-vault/healthkit"
+    );
+
+    // Verify that old data was overwritten with new data
+    const hrFinalContent = writtenFiles.get("./test-vault/healthkit/hr.json");
+    expect(hrFinalContent).toBeDefined();
+    const hrFinalData = JSON.parse(hrFinalContent!);
+    expect(hrFinalData.metrics).toHaveLength(1); // Only one entry (not duplicated)
+    expect(hrFinalData.metrics[0].date).toBe("2025-10-27 00:00:00 +0530");
+    expect(hrFinalData.metrics[0].Max).toBe(100); // New value, not 90
+    expect(hrFinalData.metrics[0].Avg).toBe(70); // New value, not 65
+    expect(hrFinalData.metrics[0].Min).toBe(55); // New value, not 50
+    expect(hrFinalData.metrics[0].source).toBe("Apple Watch"); // New value, not "Ultrahuman"
+
+    const hrvFinalContent = writtenFiles.get("./test-vault/healthkit/hrv.json");
+    expect(hrvFinalContent).toBeDefined();
+    const hrvFinalData = JSON.parse(hrvFinalContent!);
+    expect(hrvFinalData.metrics).toHaveLength(1); // Only one entry (not duplicated)
+    expect(hrvFinalData.metrics[0].date).toBe("2025-10-27 00:00:00 +0530");
+    expect(hrvFinalData.metrics[0].qty).toBe(95.5); // New value, not 85.0
+  });
+
+  it("should maintain key order across multiple ingestions", async () => {
+    // First ingestion
+    const firstIssue: HealthDataIssue = {
+      title: "HealthDataExport",
+      body: JSON.stringify({
+        data: {
+          metrics: [
+            {
+              name: "heart_rate",
+              units: "count/min",
+              data: [
+                {
+                  date: "2025-10-26 00:00:00 +0530",
+                  Min: 50,
+                  Max: 90,
+                  Avg: 65,
+                  source: "Ultrahuman",
+                },
+              ],
+            },
+            {
+              name: "heart_rate_variability",
+              units: "ms",
+              data: [
+                {
+                  date: "2025-10-26 00:00:00 +0530",
+                  qty: 80.0,
+                },
+              ],
+            },
+            {
+              name: "body_temperature",
+              units: "degC",
+              data: [
+                {
+                  qty: 36.5,
+                  date: "2025-10-26 00:00:00 +0530",
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    };
+
+    await ingestHealthDataFromIssue(
+      firstIssue,
+      mockWriter,
+      mockReader,
+      mockCommenter,
+      "./test-vault/healthkit"
+    );
+
+    // Setup mock reader with first ingestion results
+    const hrFirstContent = writtenFiles.get("./test-vault/healthkit/hr.json");
+    const hrvFirstContent = writtenFiles.get("./test-vault/healthkit/hrv.json");
+    const tempFirstContent = writtenFiles.get("./test-vault/healthkit/bodySurfaceTemp.json");
+    if (hrFirstContent) readFiles.set("./test-vault/healthkit/hr.json", hrFirstContent);
+    if (hrvFirstContent) readFiles.set("./test-vault/healthkit/hrv.json", hrvFirstContent);
+    if (tempFirstContent) readFiles.set("./test-vault/healthkit/bodySurfaceTemp.json", tempFirstContent);
+
+    // Second ingestion with different dates
+    const secondIssue: HealthDataIssue = {
+      title: "HealthDataExport",
+      body: JSON.stringify({
+        data: {
+          metrics: [
+            {
+              name: "heart_rate",
+              units: "count/min",
+              data: [
+                {
+                  source: "Apple Watch",
+                  date: "2025-10-27 00:00:00 +0530",
+                  Avg: 70,
+                  Max: 100,
+                  Min: 55,
+                },
+              ],
+            },
+            {
+              name: "heart_rate_variability",
+              units: "ms",
+              data: [
+                {
+                  date: "2025-10-27 00:00:00 +0530",
+                  qty: 90.0,
+                },
+              ],
+            },
+            {
+              name: "body_temperature",
+              units: "degC",
+              data: [
+                {
+                  date: "2025-10-27 00:00:00 +0530",
+                  qty: 36.8,
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    };
+
+    await ingestHealthDataFromIssue(
+      secondIssue,
+      mockWriter,
+      mockReader,
+      mockCommenter,
+      "./test-vault/healthkit"
+    );
+
+    // Verify key order is maintained for heart_rate (should be: Max, Avg, Min, source, date)
+    const hrFinalContent = writtenFiles.get("./test-vault/healthkit/hr.json");
+    expect(hrFinalContent).toBeDefined();
+    const hrFinalData = JSON.parse(hrFinalContent!);
+    expect(hrFinalData.metrics).toHaveLength(2);
+    
+    // Check key order for both entries
+    const hrKeys1 = Object.keys(hrFinalData.metrics[0]);
+    const hrKeys2 = Object.keys(hrFinalData.metrics[1]);
+    
+    // Expected order for heart_rate: Max, Avg, Min, source, date (from schema definition)
+    expect(hrKeys1).toEqual(hrKeys2); // Both entries should have same key order
+    // Verify the specific order matches schema definition
+    expect(hrKeys1[0]).toBe("Max");
+    expect(hrKeys1[1]).toBe("Avg");
+    expect(hrKeys1[2]).toBe("Min");
+    expect(hrKeys1[3]).toBe("source");
+    expect(hrKeys1[4]).toBe("date");
+    
+    // Verify heart_rate_variability key order (should be: qty, date)
+    const hrvFinalContent = writtenFiles.get("./test-vault/healthkit/hrv.json");
+    expect(hrvFinalContent).toBeDefined();
+    const hrvFinalData = JSON.parse(hrvFinalContent!);
+    expect(hrvFinalData.metrics).toHaveLength(2);
+    
+    const hrvKeys1 = Object.keys(hrvFinalData.metrics[0]);
+    const hrvKeys2 = Object.keys(hrvFinalData.metrics[1]);
+    expect(hrvKeys1).toEqual(hrvKeys2); // Both entries should have same key order
+    expect(hrvKeys1[0]).toBe("qty"); // qty should come before date
+    expect(hrvKeys1[1]).toBe("date");
+
+    // Verify body_temperature key order (should be: date, qty)
+    const tempFinalContent = writtenFiles.get("./test-vault/healthkit/bodySurfaceTemp.json");
+    expect(tempFinalContent).toBeDefined();
+    const tempFinalData = JSON.parse(tempFinalContent!);
+    expect(tempFinalData.metrics).toHaveLength(2);
+    
+    const tempKeys1 = Object.keys(tempFinalData.metrics[0]);
+    const tempKeys2 = Object.keys(tempFinalData.metrics[1]);
+    expect(tempKeys1).toEqual(tempKeys2); // Both entries should have same key order
+    expect(tempKeys1[0]).toBe("date"); // date should come before qty
+    expect(tempKeys1[1]).toBe("qty");
+  });
+
+  it("should maintain date order across entries after multiple ingestions", async () => {
+    // First ingestion with dates in middle range
+    const firstIssue: HealthDataIssue = {
+      title: "HealthDataExport",
+      body: JSON.stringify({
+        data: {
+          metrics: [
+            {
+              name: "heart_rate",
+              units: "count/min",
+              data: [
+                {
+                  Max: 95,
+                  Avg: 68,
+                  Min: 52,
+                  source: "Ultrahuman",
+                  date: "2025-10-28 00:00:00 +0530", // Middle date
+                },
+                {
+                  Max: 92,
+                  Avg: 65,
+                  Min: 50,
+                  source: "Ultrahuman",
+                  date: "2025-10-26 00:00:00 +0530", // Earlier date
+                },
+              ],
+            },
+            {
+              name: "heart_rate_variability",
+              units: "ms",
+              data: [
+                {
+                  qty: 88.0,
+                  date: "2025-10-29 00:00:00 +0530", // Later date
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    };
+
+    await ingestHealthDataFromIssue(
+      firstIssue,
+      mockWriter,
+      mockReader,
+      mockCommenter,
+      "./test-vault/healthkit"
+    );
+
+    // Setup mock reader with first ingestion results
+    const hrFirstContent = writtenFiles.get("./test-vault/healthkit/hr.json");
+    const hrvFirstContent = writtenFiles.get("./test-vault/healthkit/hrv.json");
+    if (hrFirstContent) readFiles.set("./test-vault/healthkit/hr.json", hrFirstContent);
+    if (hrvFirstContent) readFiles.set("./test-vault/healthkit/hrv.json", hrvFirstContent);
+
+    // Second ingestion with dates that should be inserted in correct order
+    const secondIssue: HealthDataIssue = {
+      title: "HealthDataExport",
+      body: JSON.stringify({
+        data: {
+          metrics: [
+            {
+              name: "heart_rate",
+              units: "count/min",
+              data: [
+                {
+                  Max: 100,
+                  Avg: 70,
+                  Min: 55,
+                  source: "Apple Watch",
+                  date: "2025-10-30 00:00:00 +0530", // Latest date
+                },
+                {
+                  Max: 85,
+                  Avg: 62,
+                  Min: 48,
+                  source: "Apple Watch",
+                  date: "2025-10-25 00:00:00 +0530", // Earliest date
+                },
+                {
+                  Max: 98,
+                  Avg: 67,
+                  Min: 51,
+                  source: "Apple Watch",
+                  date: "2025-10-27 00:00:00 +0530", // Between existing dates
+                },
+              ],
+            },
+            {
+              name: "heart_rate_variability",
+              units: "ms",
+              data: [
+                {
+                  qty: 92.0,
+                  date: "2025-10-25 00:00:00 +0530", // Earlier date
+                },
+                {
+                  qty: 90.0,
+                  date: "2025-10-31 00:00:00 +0530", // Later date
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    };
+
+    await ingestHealthDataFromIssue(
+      secondIssue,
+      mockWriter,
+      mockReader,
+      mockCommenter,
+      "./test-vault/healthkit"
+    );
+
+    // Verify heart_rate entries are sorted by date in ascending order
+    const hrFinalContent = writtenFiles.get("./test-vault/healthkit/hr.json");
+    expect(hrFinalContent).toBeDefined();
+    const hrFinalData = JSON.parse(hrFinalContent!);
+    expect(hrFinalData.metrics).toHaveLength(5); // 2 from first + 3 from second
+    
+    // Check dates are in ascending order
+    const hrDates = hrFinalData.metrics.map((m: any) => m.date);
+    expect(hrDates).toEqual([
+      "2025-10-25 00:00:00 +0530", // Earliest
+      "2025-10-26 00:00:00 +0530",
+      "2025-10-27 00:00:00 +0530",
+      "2025-10-28 00:00:00 +0530",
+      "2025-10-30 00:00:00 +0530", // Latest
+    ]);
+
+    // Verify heart_rate_variability entries are sorted by date in ascending order
+    const hrvFinalContent = writtenFiles.get("./test-vault/healthkit/hrv.json");
+    expect(hrvFinalContent).toBeDefined();
+    const hrvFinalData = JSON.parse(hrvFinalContent!);
+    expect(hrvFinalData.metrics).toHaveLength(3); // 1 from first + 2 from second
+    
+    // Check dates are in ascending order
+    const hrvDates = hrvFinalData.metrics.map((m: any) => m.date);
+    expect(hrvDates).toEqual([
+      "2025-10-25 00:00:00 +0530", // Earliest
+      "2025-10-29 00:00:00 +0530",
+      "2025-10-31 00:00:00 +0530", // Latest
+    ]);
+  });
 });
