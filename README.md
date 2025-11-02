@@ -22,6 +22,10 @@ The base url is:`https://shivekkhurana.github.io/state-of-being/`
 | [/vault/ultrahuman/index.json](https://shivekkhurana.github.io/state-of-being/vault/ultrahuman/index.json)           | List of weeks for which sleep data is available                                                                                                             |
 | [/vault/ultrahuman/13-03-2023.json](https://shivekkhurana.github.io/state-of-being/vault/ultrahuman/13-02-2023.json) | Weekly sleep data for week starting at `13-03-2023`. List of start dates come from index.                                                                   |
 | [/vault/ultrahuman/sleep.json](https://shivekkhurana.github.io/state-of-being/vault/ultrahuman/sleep.json)           | Aggregate sleep and recovery data by year and month                                                                                                         |
+| [/vault/healthkit/hr.json](https://shivekkhurana.github.io/state-of-being/vault/healthkit/hr.json)                     | Heart rate data with max, average, and min values per day                                                                                                   |
+| [/vault/healthkit/hrv.json](https://shivekkhurana.github.io/state-of-being/vault/healthkit/hrv.json)                   | Heart rate variability (HRV) data measured in milliseconds                                                                                                  |
+| [/vault/healthkit/bodySurfaceTemp.json](https://shivekkhurana.github.io/state-of-being/vault/healthkit/bodySurfaceTemp.json) | Body surface temperature data measured in degrees Celsius                                                                                                  |
+| [/vault/healthkit/sleep.json](https://shivekkhurana.github.io/state-of-being/vault/healthkit/sleep.json)               | Sleep analysis data including sleep stages (deep, REM, core), total sleep time, awake time, and in-bed duration                                           |
 
 ## Dashboard
 
