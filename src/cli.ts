@@ -20,7 +20,7 @@ import {
   setCurrentValueOfObservationsKeyResult,
 } from "@src/meditations";
 import { ingestHealthDataFromIssue } from "@src/healthkit";
-import { createGitHubCommenter } from "@src/github";
+import { createGitHubCommenter, closeGitHubIssue } from "@src/github";
 
 // Update the value of monthly key results, on a daily basis
 program
@@ -269,6 +269,17 @@ program
         commenter,
         config.healthkitFolderPath
       );
+
+      // Close the issue if processing was successful
+      if (result.success && githubToken && githubRepo && issueNumber) {
+        try {
+          await closeGitHubIssue(githubToken, githubRepo, issueNumber);
+          console.log("Issue closed successfully");
+        } catch (error) {
+          console.error("Failed to close issue:", error);
+          // Don't fail the whole process if closing fails
+        }
+      }
 
       console.log(result.message);
       process.exit(result.success ? 0 : 1);

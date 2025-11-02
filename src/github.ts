@@ -29,3 +29,31 @@ export function createGitHubCommenter(
     }
   };
 }
+
+/**
+ * Closes a GitHub issue
+ */
+export async function closeGitHubIssue(
+  token: string,
+  repository: string,
+  issueNumber: number
+): Promise<void> {
+  const [owner, repo] = repository.split("/");
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/issues/${issueNumber}`;
+
+  try {
+    await axios.patch(
+      apiUrl,
+      { state: "closed" },
+      {
+        headers: {
+          Authorization: `token ${token}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+      }
+    );
+  } catch (error) {
+    // Log error but don't throw - we don't want close failures to break ingestion
+    console.error("Failed to close GitHub issue:", error);
+  }
+}
