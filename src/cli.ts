@@ -19,6 +19,8 @@ import {
   setCurrentValueOfMeditationsKeyResult,
   setCurrentValueOfObservationsKeyResult,
 } from "@src/meditations";
+import { ingestHealthDataFromIssue } from "@src/healthkit";
+import { createGitHubCommenter } from "@src/github";
 
 // Update the value of monthly key results, on a daily basis
 program
@@ -214,6 +216,65 @@ program
       console.log(result);
     } catch (error) {
       console.log(error);
+    }
+  });
+
+program
+  .command("process-issue")
+  .option("--issue-number <number>", "GitHub issue number", parseInt)
+  .option("--issue-title <title>", "GitHub issue title")
+  .option("--issue-body <body>", "GitHub issue body")
+  .option("--issue-author <author>", "GitHub issue author")
+  .option("--issue-created-at <createdAt>", "GitHub issue created timestamp")
+  .action(async (options) => {
+    try {
+      const { issueNumber, issueTitle, issueBody, issueCreatedAt } = options;
+
+      if (!issueNumber || !issueTitle || !issueBody) {
+        console.error("Missing required issue parameters");
+        process.exit(1);
+      }
+
+      // Create GitHub commenter if token is available
+      const githubToken = process.env.GITHUB_TOKEN;
+      const githubRepo = process.env.GITHUB_REPOSITORY;
+      let commenter: ((comment: string) => Promise<void>) | undefined;
+
+      if (githubToken && githubRepo && issueNumber) {
+        commenter = createGitHubCommenter(githubToken, githubRepo, issueNumber);
+      }
+
+      // Create file writer/reader functions
+      const writer = async (path: string, content: string) => {
+        await Bun.write(path, content);
+      };
+
+      const reader = async (path: string): Promise<string> => {
+        const file = Bun.file(path);
+        if (await file.exists()) {
+          return await file.text();
+        }
+        throw new Error("File not found");
+      };
+
+      // Ingest the health data
+      const result = await ingestHealthDataFromIssue(
+        {
+          title: issueTitle,
+          body: issueBody,
+          createdAt: issueCreatedAt,
+        },
+        writer,
+        reader,
+        commenter,
+        config.healthkitFolderPath
+      );
+
+      console.log(result.message);
+      process.exit(result.success ? 0 : 1);
+    } catch (error) {
+      console.error("An error occurred:", error);
+      process.exit(1);
     }
   });
 

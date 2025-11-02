@@ -1,0 +1,38 @@
+name: "🎫 Handle New Issue"
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  process-issue:
+    name: "👷 Process issue"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "📦 Checkout"
+        uses: actions/checkout@v3
+
+      - name: "🍔 Set up Bun"
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: "✅ Install dependencies"
+        run: bun install
+
+      - name: "🎫 Process issue data"
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          bun run cli process-issue \
+            --issue-number "${{ github.event.issue.number }}" \
+            --issue-title "${{ github.event.issue.title }}" \
+            --issue-body "$ISSUE_BODY" \
+            --issue-author "${{ github.event.issue.user.login }}" \
+            --issue-created-at "${{ github.event.issue.created_at }}"
+
