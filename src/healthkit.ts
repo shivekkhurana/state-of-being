@@ -5,18 +5,18 @@ type ReaderFunction = (path: string) => Promise<string>;
 type CommentFunction = (comment: string) => Promise<void>;
 
 // Zod schemas for individual metric data types
-const HeartRateDataSchema = z.object({
+const HeartRateDataSchema = z.looseObject({
   Max: z.number().optional(),
   Avg: z.number().optional(),
   Min: z.number().optional(),
   source: z.string().optional(),
   date: z.string(),
-}).passthrough();
+});
 
-const HeartRateVariabilityDataSchema = z.object({
+const HeartRateVariabilityDataSchema = z.looseObject({
   qty: z.number(),
   date: z.string(),
-}).passthrough();
+});
 
 const SleepAnalysisDataSchema = z.object({
   inBedStart: z.string().optional(),
@@ -32,20 +32,13 @@ const SleepAnalysisDataSchema = z.object({
   inBed: z.number().optional(),
   core: z.number().optional(),
   asleep: z.number().optional(),
-}).passthrough();
+});
 
-const BodyTemperatureDataSchema = z.object({
+const BodyTemperatureDataSchema = z.looseObject({
   date: z.string(),
   qty: z.number(),
-}).passthrough();
+});
 
-// Union type for all health metric data (no name discriminator on data items)
-const HealthMetricDataSchema = z.union([
-  HeartRateDataSchema,
-  HeartRateVariabilityDataSchema,
-  SleepAnalysisDataSchema,
-  BodyTemperatureDataSchema,
-]);
 
 // Metric schemas with discriminated unions based on name
 const HeartRateMetricSchema = z.object({
@@ -81,11 +74,11 @@ const HealthMetricSchema = z.discriminatedUnion("name", [
 
 // Lenient schema that allows unknown metrics to pass through
 // Unknown metrics will be validated during processing
-const LenientMetricSchema = z.object({
+const LenientMetricSchema = z.looseObject({
   name: z.string(),
   units: z.string(),
   data: z.array(z.any()),
-}).passthrough();
+});
 
 const HealthDataExportSchema = z.object({
   data: z.object({
@@ -241,20 +234,91 @@ function getItemIdentifier(item: HealthMetricData): string {
 }
 
 /**
- * Checks if a sleep entry is incomplete (only has source and date)
+ * Extracts keys from a Zod object schema in the order they were defined
  */
-function isIncompleteSleepEntry(item: HealthMetricData): boolean {
-  if ('source' in item && 'date' in item) {
-    // Check if it's a sleep entry by looking for sleep-specific fields
-    const hasSleepFields = 'totalSleep' in item || 'inBedStart' in item || 'sleepStart' in item;
-    // If it has source and date but no sleep-specific fields, it's incomplete
-    if (!hasSleepFields) {
-      const keys = Object.keys(item);
-      // An incomplete entry should only have source and date (2 keys)
-      return keys.length === 2;
+function extractKeysFromZodSchema(schema: z.ZodObject<any> | z.ZodLazy<any>): string[] {
+  // Try to access shape directly (works for both z.object() and z.looseObject())
+  if ('shape' in schema) {
+    const shape = (schema as any).shape;
+    // shape can be an object or a function
+    if (typeof shape === 'function') {
+      const shapeObj = shape();
+      if (shapeObj && typeof shapeObj === 'object') {
+        return Object.keys(shapeObj);
+      }
+    } else if (shape && typeof shape === 'object') {
+      return Object.keys(shape);
     }
   }
-  return false;
+  
+  return [];
+}
+
+/**
+ * Maps metric names to their corresponding data schemas
+ */
+const METRIC_TO_DATA_SCHEMA: Record<string, z.ZodObject<any> | z.ZodLazy<any>> = {
+  heart_rate: HeartRateDataSchema,
+  heart_rate_variability: HeartRateVariabilityDataSchema,
+  sleep_analysis: SleepAnalysisDataSchema,
+  body_temperature: BodyTemperatureDataSchema,
+};
+
+/**
+ * Key order for each schema type (dynamically generated from Zod schema definitions)
+ */
+const SCHEMA_KEY_ORDER: Record<string, string[]> = Object.fromEntries(
+  Object.entries(METRIC_TO_DATA_SCHEMA).map(([metricName, schema]) => [
+    metricName,
+    extractKeysFromZodSchema(schema),
+  ])
+);
+
+/**
+ * Reorders object keys to match the Zod schema definition order
+ */
+function reorderKeysBySchema<T extends Record<string, any>>(
+  obj: T,
+  metricName: string
+): T {
+  const keyOrder = SCHEMA_KEY_ORDER[metricName];
+  if (!keyOrder) {
+    // Unknown metric type, return as-is
+    return obj;
+  }
+
+  const reordered: any = {};
+  
+  // Add keys in schema order
+  for (const key of keyOrder) {
+    if (key in obj) {
+      reordered[key] = obj[key];
+    }
+  }
+  
+  // Add any remaining keys that weren't in the schema order
+  for (const key in obj) {
+    if (!(key in reordered)) {
+      reordered[key] = obj[key];
+    }
+  }
+  
+  return reordered as T;
+}
+
+/**
+ * Checks if a sleep entry is incomplete (only has source and date)
+ * An incomplete entry lacks the totalSleep field or other essential sleep data
+ */
+function isIncompleteSleepEntry(item: HealthMetricData): boolean {
+  const sleepValidation = SleepAnalysisDataSchema.safeParse(item);
+  if (!sleepValidation.success) {
+    return false; // Not a sleep entry
+  }
+  
+  const parsed = sleepValidation.data;
+  // Incomplete entry lacks totalSleep (the key indicator of actual sleep data)
+  return !parsed.totalSleep;
 }
 
 /**
@@ -375,8 +439,13 @@ export async function processMetric(
     return dateA.localeCompare(dateB);
   });
 
+  // Reorder keys in each metric to match Zod schema order
+  const reorderedMetrics = sortedMetrics.map((metric) =>
+    reorderKeysBySchema(metric, validatedMetric.name)
+  );
+
   const mergedData: HealthDataFile = {
-    metrics: sortedMetrics,
+    metrics: reorderedMetrics,
   };
 
   const contentToWrite = JSON.stringify(mergedData, null, 2);
@@ -430,9 +499,8 @@ export async function ingestHealthDataFromIssue(
   const healthData = parseResult.data;
 
   // Step 3: Process each metric
-  const results: string[] = [];
+  const messages: string[] = [];
   const errors: string[] = [];
-  const skipped: string[] = [];
 
   for (const metric of healthData.data.metrics) {
     try {
@@ -444,12 +512,7 @@ export async function ingestHealthDataFromIssue(
       );
 
       if (result.success) {
-        // Check if it's a skip message (unknown metrics)
-        if (result.message.includes("Skipping unknown metric")) {
-          skipped.push(result.message);
-        } else {
-          results.push(result.message);
-        }
+        messages.push(result.message);
       } else {
         errors.push(result.message);
       }
@@ -461,153 +524,24 @@ export async function ingestHealthDataFromIssue(
 
   // Step 4: Handle results and post comments
   if (errors.length > 0) {
-    const errorMessage = `❌ Encountered errors while processing:\n${errors.map(e => `- ${e}`).join("\n")}`;
+    const errorMessage = `❌ Encountered errors:\n${errors.map(e => `- ${e}`).join("\n")}`;
     if (commenter) {
       await commenter(errorMessage);
     }
     return {
       success: false,
-      message: `Errors occurred: ${errors.join("; ")}`,
+      message: errorMessage,
     };
   }
 
-  // Build success message with results and skipped items
-  const allMessages = [...results];
-  if (skipped.length > 0) {
-    allMessages.push(...skipped);
-  }
-
-  const successMessage = `✅ Successfully ingested health data!\n\n${allMessages.map(r => `- ${r}`).join("\n")}`;
+  const successMessage = `✅ Successfully ingested health data!\n\n${messages.map(m => `- ${m}`).join("\n")}`;
   if (commenter) {
     await commenter(successMessage);
   }
 
-  const messageParts = [...results];
-  if (skipped.length > 0) {
-    messageParts.push(...skipped);
-  }
-
   return {
     success: true,
-    message: `Successfully ingested health data:\n${messageParts.join("\n")}`,
+    message: successMessage,
   };
 }
 
-/**
- * Main function to ingest health data directly from a HealthDataExport object
- * This is useful for processing JSON files directly without going through GitHub issues
- */
-export async function ingestHealthDataFromExport(
-  healthData: HealthDataExport,
-  writer: WriterFunction,
-  reader: ReaderFunction,
-  basePath: string = "./vault/healthkit"
-): Promise<{ success: boolean; message: string }> {
-  // Process each metric
-  const results: string[] = [];
-  const errors: string[] = [];
-  const skipped: string[] = [];
-
-  for (const metric of healthData.data.metrics) {
-    try {
-      const result = await processMetric(
-        metric,
-        basePath,
-        writer,
-        reader
-      );
-
-      if (result.success) {
-        // Check if it's a skip message (unknown metrics)
-        if (result.message.includes("Skipping unknown metric")) {
-          skipped.push(result.message);
-        } else {
-          results.push(result.message);
-        }
-      } else {
-        errors.push(result.message);
-      }
-    } catch (error) {
-      const errorMsg = `Error processing ${metric.name}: ${error instanceof Error ? error.message : String(error)}`;
-      errors.push(errorMsg);
-    }
-  }
-
-  // Handle results
-  if (errors.length > 0) {
-    return {
-      success: false,
-      message: `Errors occurred: ${errors.join("; ")}`,
-    };
-  }
-
-  const messageParts = [...results];
-  if (skipped.length > 0) {
-    messageParts.push(...skipped);
-  }
-
-  return {
-    success: true,
-    message: `Successfully ingested health data:\n${messageParts.join("\n")}`,
-  };
-}
-
-/**
- * Sorts all existing healthkit files by date in ascending order
- * This ensures all files are in chronological order for clean commits
- */
-export async function sortAllHealthkitFiles(
-  writer: WriterFunction,
-  reader: ReaderFunction,
-  basePath: string = "./vault/healthkit"
-): Promise<{ success: boolean; message: string }> {
-  const results: string[] = [];
-  const errors: string[] = [];
-
-  // Process each known metric file
-  for (const [metricName, fileName] of Object.entries(METRIC_TO_FILE_MAP)) {
-    try {
-      const filePath = `${basePath}/${fileName}`;
-      
-      // Try to read existing data
-      const existingData = await readExistingData(filePath, reader);
-      
-      if (existingData.metrics.length === 0) {
-        results.push(`No data to sort in ${fileName}`);
-        continue;
-      }
-
-      // Sort by date in ascending order
-      const sortedMetrics = existingData.metrics.sort((a, b) => {
-        const dateA = a.date || '';
-        const dateB = b.date || '';
-        return dateA.localeCompare(dateB);
-      });
-
-      // Write back the sorted data
-      const sortedData: HealthDataFile = {
-        metrics: sortedMetrics,
-      };
-
-      const contentToWrite = JSON.stringify(sortedData, null, 2);
-      await writer(filePath, contentToWrite);
-      
-      results.push(`Sorted ${sortedMetrics.length} entries in ${fileName}`);
-    } catch (error) {
-      const errorMsg = `Error sorting ${fileName}: ${error instanceof Error ? error.message : String(error)}`;
-      errors.push(errorMsg);
-    }
-  }
-
-  if (errors.length > 0) {
-    return {
-      success: false,
-      message: `Errors occurred: ${errors.join("; ")}\n${results.join("\n")}`,
-    };
-  }
-
-  return {
-    success: true,
-    message: `Successfully sorted all healthkit files:\n${results.join("\n")}`,
-  };
-}
