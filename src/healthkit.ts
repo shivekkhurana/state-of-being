@@ -408,3 +408,62 @@ export async function ingestHealthDataFromIssue(
     message: `Successfully ingested health data:\n${messageParts.join("\n")}`,
   };
 }
+
+/**
+ * Main function to ingest health data directly from a HealthDataExport object
+ * This is useful for processing JSON files directly without going through GitHub issues
+ */
+export async function ingestHealthDataFromExport(
+  healthData: HealthDataExport,
+  writer: WriterFunction,
+  reader: ReaderFunction,
+  basePath: string = "./vault/healthkit"
+): Promise<{ success: boolean; message: string }> {
+  // Process each metric
+  const results: string[] = [];
+  const errors: string[] = [];
+  const skipped: string[] = [];
+
+  for (const metric of healthData.data.metrics) {
+    try {
+      const result = await processMetric(
+        metric,
+        basePath,
+        writer,
+        reader
+      );
+
+      if (result.success) {
+        // Check if it's a skip message (unknown metrics)
+        if (result.message.includes("Skipping unknown metric")) {
+          skipped.push(result.message);
+        } else {
+          results.push(result.message);
+        }
+      } else {
+        errors.push(result.message);
+      }
+    } catch (error) {
+      const errorMsg = `Error processing ${metric.name}: ${error instanceof Error ? error.message : String(error)}`;
+      errors.push(errorMsg);
+    }
+  }
+
+  // Handle results
+  if (errors.length > 0) {
+    return {
+      success: false,
+      message: `Errors occurred: ${errors.join("; ")}`,
+    };
+  }
+
+  const messageParts = [...results];
+  if (skipped.length > 0) {
+    messageParts.push(...skipped);
+  }
+
+  return {
+    success: true,
+    message: `Successfully ingested health data:\n${messageParts.join("\n")}`,
+  };
+}

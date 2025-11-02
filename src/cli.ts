@@ -19,7 +19,7 @@ import {
   setCurrentValueOfMeditationsKeyResult,
   setCurrentValueOfObservationsKeyResult,
 } from "@src/meditations";
-import { ingestHealthDataFromIssue } from "@src/healthkit";
+import { ingestHealthDataFromIssue, ingestHealthDataFromExport, parseHealthData } from "@src/healthkit";
 import { createGitHubCommenter, closeGitHubIssue } from "@src/github";
 
 // Update the value of monthly key results, on a daily basis
@@ -280,6 +280,65 @@ program
           // Don't fail the whole process if closing fails
         }
       }
+
+      console.log(result.message);
+      process.exit(result.success ? 0 : 1);
+    } catch (error) {
+      console.error("An error occurred:", error);
+      process.exit(1);
+    }
+  });
+
+program
+  .command("import-health-data-from-file")
+  .option("-f, --file <path>", "Path to the JSON file containing health data export")
+  .action(async (options) => {
+    try {
+      const { file } = options;
+
+      if (!file) {
+        console.error("Missing required --file parameter");
+        console.error("Usage: import-health-data-from-file --file <path-to-json-file>");
+        process.exit(1);
+      }
+
+      // Read the JSON file
+      const fileHandle = Bun.file(file);
+      if (!(await fileHandle.exists())) {
+        console.error(`File not found: ${file}`);
+        process.exit(1);
+      }
+
+      const fileContent = await fileHandle.text();
+
+      // Parse and validate the health data
+      const parseResult = parseHealthData(fileContent);
+      if (!parseResult.success || !parseResult.data) {
+        const errorMsg = parseResult.error || "Failed to parse health data";
+        console.error(`❌ ${errorMsg}`);
+        process.exit(1);
+      }
+
+      // Create file writer/reader functions
+      const writer = async (path: string, content: string) => {
+        await Bun.write(path, content);
+      };
+
+      const reader = async (path: string): Promise<string> => {
+        const file = Bun.file(path);
+        if (await file.exists()) {
+          return await file.text();
+        }
+        throw new Error("File not found");
+      };
+
+      // Ingest the health data
+      const result = await ingestHealthDataFromExport(
+        parseResult.data,
+        writer,
+        reader,
+        config.healthkitFolderPath
+      );
 
       console.log(result.message);
       process.exit(result.success ? 0 : 1);
