@@ -228,10 +228,15 @@ program
   .option("--issue-created-at <createdAt>", "GitHub issue created timestamp")
   .action(async (options) => {
     try {
-      const { issueNumber, issueTitle, issueBody, issueCreatedAt } = options;
+      const { issueNumber, issueTitle, issueBody, issueCreatedAt, issueAuthor } = options;
 
       if (!issueNumber || !issueTitle || !issueBody) {
         console.error("Missing required issue parameters");
+        process.exit(1);
+      }
+
+      if (issueAuthor !== "0x4444") {
+        console.error("Issue author is not authorized");
         process.exit(1);
       }
 
