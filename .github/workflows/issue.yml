@@ -61,6 +61,17 @@ jobs:
             --issue-author "${{ github.event.issue.user.login }}" \
             --issue-created-at "${{ github.event.issue.created_at }}"
 
+      - name: "🔍 Debug: Verify file was written"
+        if: success()
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Checking if location.json exists:"
+          ls -la vault/location.json || echo "File not found!"
+          echo "Git status:"
+          git status vault/location.json || true
+          echo "File content tail:"
+          tail -5 vault/location.json || true
+
       - name: "🗄️ Commit vault back to repo"
         if: success()
         uses: stefanzweifel/git-auto-commit-action@v4.15.4

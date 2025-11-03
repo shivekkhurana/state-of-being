@@ -185,6 +185,11 @@ export async function ingestLocationDataFromIssue(
 
   const updatedLocations = [...existingLocations, newEntry];
   const contentToWrite = JSON.stringify(updatedLocations, null, 2);
+  
+  console.log(`Writing to: ${filePath}`);
+  console.log(`Current entries: ${existingLocations.length}, New entry: ${JSON.stringify(newEntry)}`);
+  console.log(`Total entries after add: ${updatedLocations.length}`);
+  
   await writer(filePath, contentToWrite);
 
   const successMessage = `✅ Successfully updated location!\n\nAdded: ${locationData.city}, ${locationData.country} (${currentDate})`;
