@@ -235,8 +235,15 @@ program
         process.exit(1);
       }
 
-      if (issueAuthor !== "0x4444") {
-        console.error("Issue author is not authorized");
+      if (issueBody.trim() === "") {
+        console.error("Issue body cannot be empty");
+        process.exit(1);
+      }
+
+      const normalizedAuthor = issueAuthor?.trim();
+      if (normalizedAuthor !== "0x4444") {
+        console.error(`Issue author is not authorized. Received: "${issueAuthor}" (normalized: "${normalizedAuthor}")`);
+        console.error("Expected: \"0x4444\"");
         process.exit(1);
       }
 
