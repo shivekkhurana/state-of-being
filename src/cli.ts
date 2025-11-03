@@ -19,7 +19,7 @@ import {
   setCurrentValueOfMeditationsKeyResult,
   setCurrentValueOfObservationsKeyResult,
 } from "@src/meditations";
-import { ingestHealthDataFromIssue, sortKeysInHealthkitFiles } from "@src/healthkit";
+import { ingestHealthDataFromIssue } from "@src/healthkit";
 import { createGitHubCommenter, closeGitHubIssue } from "@src/github";
 
 // Update the value of monthly key results, on a daily basis
@@ -292,42 +292,6 @@ program
           // Don't fail the whole process if closing fails
         }
       }
-
-      console.log(result.message);
-      process.exit(result.success ? 0 : 1);
-    } catch (error) {
-      console.error("An error occurred:", error);
-      process.exit(1);
-    }
-  });
-
-program
-  .command("sort-healthkit-keys")
-  .option(
-    "--base-path <path>",
-    "Base path to healthkit folder",
-    config.healthkitFolderPath
-  )
-  .action(async (options) => {
-    try {
-      // Create file writer/reader functions
-      const writer = async (path: string, content: string) => {
-        await Bun.write(path, content);
-      };
-
-      const reader = async (path: string): Promise<string> => {
-        const file = Bun.file(path);
-        if (await file.exists()) {
-          return await file.text();
-        }
-        throw new Error("File not found");
-      };
-
-      const result = await sortKeysInHealthkitFiles(
-        options.basePath,
-        reader,
-        writer
-      );
 
       console.log(result.message);
       process.exit(result.success ? 0 : 1);
