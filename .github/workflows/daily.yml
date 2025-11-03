@@ -1,93 +1,86 @@
-name: "☀️ Daily tasks"
+name: '☀️ Daily tasks'
 
 on:
   schedule:
     # Run daily at 11:30 pm
-    - cron: "30 23 * * *"
+    - cron: '30 23 * * *'
 
   workflow_dispatch:
     inputs:
       year:
-        description: "Year"
+        description: 'Year'
         required: false
       month:
-        description: "Month"
+        description: 'Month'
         required: false
 
 jobs:
   run-daily-tasks:
-    name: "👷 Run daily tasks"
+    name: '👷 Run daily tasks'
     runs-on: ubuntu-latest
 
     env:
       NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
       GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
-      ULTRAHUMAN_R1_TOKEN: ${{ secrets.ULTRAHUMAN_R1_TOKEN}}
 
     steps:
-      - name: "📦 Checkout"
+      - name: '📦 Checkout'
         uses: actions/checkout@v3
 
-      - name: "🍔 Set up Bun"
+      - name: '🍔 Set up Bun'
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
 
-      - name: "✅ Install dependencies"
+      - name: '✅ Install dependencies'
         run: bun install
 
-      - name: "🐒 Fetch workouts value and set on Notion with given year and month"
+      - name: '🐒 Fetch workouts value and set on Notion with given year and month'
         if: "${{ github.event.inputs.year != '' && github.event.inputs.month != '' }}"
         run: bun run cli set-current-value-of-workout-key-result -y ${{ github.event.inputs.year }} -m ${{ github.event.inputs.month }}
 
-      - name: "‍🐒 Fetch workouts value and set on Notion with current year and month"
+      - name: '‍🐒 Fetch workouts value and set on Notion with current year and month'
         if: "${{ github.event.inputs.year == '' && github.event.inputs.month == '' }}"
         run: bun run cli set-current-value-of-workout-key-result
 
-      - name: "🧘‍♂️ Fetch meditations value and set on Notion with given year and month"
+      - name: '🧘‍♂️ Fetch meditations value and set on Notion with given year and month'
         if: "${{ github.event.inputs.year != '' && github.event.inputs.month != '' }}"
         run: bun run cli set-current-value-of-meditations-key-result -y ${{ github.event.inputs.year }} -m ${{ github.event.inputs.month }}
 
-      - name: "‍🧘‍♂️ Fetch meditations value and set on Notion with current year and month"
+      - name: '‍🧘‍♂️ Fetch meditations value and set on Notion with current year and month'
         if: "${{ github.event.inputs.year == '' && github.event.inputs.month == '' }}"
         run: bun run cli set-current-value-of-meditations-key-result
 
-      - name: "👀 Fetch observations value and set on Notion with given year and month"
+      - name: '👀 Fetch observations value and set on Notion with given year and month'
         if: "${{ github.event.inputs.year != '' && github.event.inputs.month != '' }}"
         run: bun run cli set-current-value-of-observations-key-result -y ${{ github.event.inputs.year }} -m ${{ github.event.inputs.month }}
 
-      - name: "‍👀 Fetch observations value and set on Notion with current year and month"
+      - name: '‍👀 Fetch observations value and set on Notion with current year and month'
         if: "${{ github.event.inputs.year == '' && github.event.inputs.month == '' }}"
         run: bun run cli set-current-value-of-observations-key-result
 
-      - name: "📃 Fetch workouts data and write to vault"
+      - name: '📃 Fetch workouts data and write to vault'
         run: bun run cli save-workout-stats-to-vault
 
-      - name: "🛌 Fetch sleep data and write to vault"
-        run: bun run cli save-next-sleep-stats-to-vault
-
-      - name: "💤 Aggregate weekly sleep data and write to vault"
-        run: bun run cli save-sleep-aggregate-stats-to-vault
-
-      - name: "🕊️ Aggregate monthly meditation data and write to vault for given year and month"
+      - name: '🕊️ Aggregate monthly meditation data and write to vault for given year and month'
         if: "${{ github.event.inputs.year != '' && github.event.inputs.month != '' }}"
         run: bun run cli save-monthly-meditation-aggregates-to-vault -y ${{ github.event.inputs.year }} -m ${{ github.event.inputs.month }}
 
-      - name: "🕊️ Aggregate monthly meditation data and write to vault for current year and month"
+      - name: '🕊️ Aggregate monthly meditation data and write to vault for current year and month'
         if: "${{ github.event.inputs.year == '' && github.event.inputs.month == '' }}"
         run: bun run cli save-monthly-meditation-aggregates-to-vault
 
-      - name: "🗄️ Commit vault back to repo"
+      - name: '🗄️ Commit vault back to repo'
         uses: stefanzweifel/git-auto-commit-action@v4.15.4
         with:
-          commit_message: "🤖 Save data to vault"
-          commit_user_name: "0x4444"
-          commit_user_email: "0x4444@users.noreply.github.com"
-          commit_author: "0x4444 <0x4444@users.noreply.github.com>"
-          file_pattern: "vault/*"
+          commit_message: '🤖 Save data to vault'
+          commit_user_name: '0x4444'
+          commit_user_email: '0x4444@users.noreply.github.com'
+          commit_author: '0x4444 <0x4444@users.noreply.github.com>'
+          file_pattern: 'vault/*'
 
   deploy:
-    name: "☁️"
+    name: '☁️'
     needs: [run-daily-tasks]
     uses: shivekkhurana/state-of-being/.github/workflows/cd.yml@master
     secrets: inherit

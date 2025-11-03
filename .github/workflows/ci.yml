@@ -1,4 +1,4 @@
-name: "🧑‍🔬 CI"
+name: '🧑‍🔬 CI'
 
 on:
   pull_request:
@@ -11,27 +11,26 @@ jobs:
     env:
       NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
       GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
-      ULTRAHUMAN_R1_TOKEN: ${{ secrets.ULTRAHUMAN_R1_TOKEN}}
 
     steps:
-      - name: "📦 Checkout"
+      - name: '📦 Checkout'
         uses: actions/checkout@v3
 
-      - name: "🍔 Set up Bun"
+      - name: '🍔 Set up Bun'
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
 
-      - name: "✅ Install dependencies"
+      - name: '✅ Install dependencies'
         run: bun install
 
-      - name: "🚥 Run tests"
+      - name: '🚥 Run tests'
         run: bun test
 
-      - name: "💬 Run status update"
+      - name: '💬 Run status update'
         uses: Sibz/github-status-action@v1
         with:
           authToken: ${{secrets.GITHUB_TOKEN}}
           state: ${{ job.status }}
           sha: ${{github.event.pull_request.head.sha || github.sha}}
-          context: "💚 Build succeeded"
+          context: '💚 Build succeeded'
