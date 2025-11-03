@@ -21,4 +21,5 @@ export default {
   meditationAggregatesSavePath: "./vault/meditations.json",
   targetObservationsPerDay: 3,
   healthkitFolderPath: "./vault/healthkit",
+  locationFilePath: "./vault/location.json",
 };

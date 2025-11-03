@@ -20,6 +20,7 @@ import {
   setCurrentValueOfObservationsKeyResult,
 } from "@src/meditations";
 import { ingestHealthDataFromIssue } from "@src/healthkit";
+import { ingestLocationDataFromIssue } from "@src/location";
 import { createGitHubCommenter, closeGitHubIssue } from "@src/github";
 
 // Update the value of monthly key results, on a daily basis
@@ -269,18 +270,46 @@ program
         throw new Error("File not found");
       };
 
-      // Ingest the health data
-      const result = await ingestHealthDataFromIssue(
-        {
-          title: issueTitle,
-          body: issueBody,
-          createdAt: issueCreatedAt,
-        },
-        writer,
-        reader,
-        commenter,
-        config.healthkitFolderPath
-      );
+      // Route to appropriate processor based on issue title
+      let result: { success: boolean; message: string };
+
+      if (issueTitle === "HealthDataExport") {
+        // Ingest the health data
+        result = await ingestHealthDataFromIssue(
+          {
+            title: issueTitle,
+            body: issueBody,
+            createdAt: issueCreatedAt,
+          },
+          writer,
+          reader,
+          commenter,
+          config.healthkitFolderPath
+        );
+      } else if (issueTitle === "LocationDataExport") {
+        // Ingest the location data
+        result = await ingestLocationDataFromIssue(
+          {
+            title: issueTitle,
+            body: issueBody,
+            createdAt: issueCreatedAt,
+          },
+          writer,
+          reader,
+          commenter,
+          config.locationFilePath
+        );
+      } else {
+        const errorMsg = `Unknown issue type: ${issueTitle}. Expected "HealthDataExport" or "LocationDataExport"`;
+        console.error(errorMsg);
+        if (commenter) {
+          await commenter(`❌ ${errorMsg}`);
+        }
+        result = {
+          success: false,
+          message: errorMsg,
+        };
+      }
 
       // Close the issue if processing was successful
       if (result.success && githubToken && githubRepo && issueNumber) {

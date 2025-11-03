@@ -11,7 +11,7 @@ permissions:
 jobs:
   process-issue:
     name: "👷 Process issue"
-    if: github.event.issue.title == 'healthDataExport'
+    if: github.event.issue.title == 'HealthDataExport' || github.event.issue.title == 'LocationDataExport'
     runs-on: ubuntu-latest
     steps:
       - name: "📦 Checkout"
@@ -65,11 +65,13 @@ jobs:
         if: success()
         uses: stefanzweifel/git-auto-commit-action@v4.15.4
         with:
-          commit_message: "🤖 Save health data to vault"
+          commit_message: "🤖 Save data to vault"
           commit_user_name: "0x4444"
           commit_user_email: "0x4444@users.noreply.github.com"
           commit_author: "0x4444 <0x4444@users.noreply.github.com>"
-          file_pattern: "vault/healthkit/*"
+          file_pattern: |
+            vault/healthkit/*
+            vault/location.json
 
       - name: "🏷️ Remove processing label"
         if: always()
