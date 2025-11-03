@@ -242,9 +242,9 @@ program
       }
 
       const normalizedAuthor = issueAuthor?.trim();
-      if (normalizedAuthor !== "0x4444") {
+      if (normalizedAuthor !== "0x4444" && normalizedAuthor !== "shivekkhurana") {
         console.error(`Issue author is not authorized. Received: "${issueAuthor}" (normalized: "${normalizedAuthor}")`);
-        console.error("Expected: \"0x4444\"");
+        console.error("Expected: \"0x4444\" or \"shivekkhurana\"");
         process.exit(1);
       }
 
