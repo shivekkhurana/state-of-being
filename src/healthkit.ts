@@ -1,4 +1,4 @@
-import { z, ZodError } from "zod";
+import { z, ZodError } from 'zod';
 
 type WriterFunction = (path: string, content: string) => Promise<void>;
 type ReaderFunction = (path: string) => Promise<string>;
@@ -14,6 +14,11 @@ const HeartRateDataSchema = z.looseObject({
 });
 
 const HeartRateVariabilityDataSchema = z.looseObject({
+  qty: z.number(),
+  date: z.string(),
+});
+
+const RestingHeartRateDataSchema = z.looseObject({
   qty: z.number(),
   date: z.string(),
 });
@@ -39,37 +44,43 @@ const BodyTemperatureDataSchema = z.looseObject({
   qty: z.number(),
 });
 
-
 // Metric schemas with discriminated unions based on name
 const HeartRateMetricSchema = z.object({
-  name: z.literal("heart_rate"),
-  units: z.literal("count/min"),
+  name: z.literal('heart_rate'),
+  units: z.literal('count/min'),
   data: z.array(HeartRateDataSchema),
 });
 
 const HeartRateVariabilityMetricSchema = z.object({
-  name: z.literal("heart_rate_variability"),
-  units: z.literal("ms"),
+  name: z.literal('heart_rate_variability'),
+  units: z.literal('ms'),
   data: z.array(HeartRateVariabilityDataSchema),
 });
 
 const SleepAnalysisMetricSchema = z.object({
-  name: z.literal("sleep_analysis"),
-  units: z.literal("hr"),
+  name: z.literal('sleep_analysis'),
+  units: z.literal('hr'),
   data: z.array(SleepAnalysisDataSchema),
 });
 
 const BodyTemperatureMetricSchema = z.object({
-  name: z.literal("body_temperature"),
-  units: z.literal("degC"),
+  name: z.literal('body_temperature'),
+  units: z.literal('degC'),
   data: z.array(BodyTemperatureDataSchema),
 });
 
-const HealthMetricSchema = z.discriminatedUnion("name", [
+const RestingHeartRateMetricSchema = z.object({
+  name: z.literal('resting_heart_rate'),
+  units: z.literal('count/min'),
+  data: z.array(RestingHeartRateDataSchema),
+});
+
+const HealthMetricSchema = z.discriminatedUnion('name', [
   HeartRateMetricSchema,
   HeartRateVariabilityMetricSchema,
   SleepAnalysisMetricSchema,
   BodyTemperatureMetricSchema,
+  RestingHeartRateMetricSchema,
 ]);
 
 // Lenient schema that allows unknown metrics to pass through
@@ -93,6 +104,7 @@ const HealthDataFileSchema = z.object({
       HeartRateVariabilityDataSchema,
       SleepAnalysisDataSchema,
       BodyTemperatureDataSchema,
+      RestingHeartRateDataSchema,
     ])
   ),
 });
@@ -106,30 +118,40 @@ const HealthDataIssueSchema = z.object({
 // Inferred TypeScript types from Zod schemas
 export type HealthDataIssue = z.infer<typeof HealthDataIssueSchema>;
 export type HeartRateData = z.infer<typeof HeartRateDataSchema>;
-export type HeartRateVariabilityData = z.infer<typeof HeartRateVariabilityDataSchema>;
+export type HeartRateVariabilityData = z.infer<
+  typeof HeartRateVariabilityDataSchema
+>;
+export type RestingHeartRateData = z.infer<typeof RestingHeartRateDataSchema>;
 export type SleepAnalysisData = z.infer<typeof SleepAnalysisDataSchema>;
 export type BodyTemperatureData = z.infer<typeof BodyTemperatureDataSchema>;
 export type HealthMetricData =
   | HeartRateData
   | HeartRateVariabilityData
+  | RestingHeartRateData
   | SleepAnalysisData
   | BodyTemperatureData;
 export type HeartRateMetric = z.infer<typeof HeartRateMetricSchema>;
-export type HeartRateVariabilityMetric = z.infer<typeof HeartRateVariabilityMetricSchema>;
+export type HeartRateVariabilityMetric = z.infer<
+  typeof HeartRateVariabilityMetricSchema
+>;
 export type SleepAnalysisMetric = z.infer<typeof SleepAnalysisMetricSchema>;
 export type BodyTemperatureMetric = z.infer<typeof BodyTemperatureMetricSchema>;
+export type RestingHeartRateMetric = z.infer<
+  typeof RestingHeartRateMetricSchema
+>;
 export type HealthMetric = z.infer<typeof HealthMetricSchema>;
 export type HealthDataExport = z.infer<typeof HealthDataExportSchema>;
 export type HealthDataFile = z.infer<typeof HealthDataFileSchema>;
 
 const METRIC_TO_FILE_MAP: Record<string, string> = {
-  heart_rate: "hr.json",
-  heart_rate_variability: "hrv.json",
-  body_temperature: "bodySurfaceTemp.json",
-  sleep_analysis: "sleep.json",
+  heart_rate: 'hr.json',
+  heart_rate_variability: 'hrv.json',
+  body_temperature: 'bodySurfaceTemp.json',
+  sleep_analysis: 'sleep.json',
+  resting_heart_rate: 'restingHeartRate.json',
 };
 
-const EXPECTED_ISSUE_TITLE = "HealthDataExport";
+const EXPECTED_ISSUE_TITLE = 'HealthDataExport';
 
 /**
  * Validates that the issue title matches the expected format
@@ -162,8 +184,8 @@ export function parseHealthData(body: string): {
     if (!validationResult.success) {
       const error: ZodError = validationResult.error;
       const errorMessages = error.issues
-        .map((err) => `${err.path.join(".")}: ${err.message}`)
-        .join("; ");
+        .map((err) => `${err.path.join('.')}: ${err.message}`)
+        .join('; ');
       return {
         success: false,
         error: `Validation failed: ${errorMessages}`,
@@ -174,7 +196,9 @@ export function parseHealthData(body: string): {
   } catch (error) {
     return {
       success: false,
-      error: `Error parsing health data: ${error instanceof Error ? error.message : String(error)}`,
+      error: `Error parsing health data: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
     };
   }
 }
@@ -204,17 +228,17 @@ export async function readExistingData(
   try {
     const existingContent = await reader(filePath);
     const parsedJson = JSON.parse(existingContent);
-    
+
     // Validate with Zod schema
     const validationResult = HealthDataFileSchema.safeParse(parsedJson);
-    
+
     if (!validationResult.success) {
       // If validation fails, return empty structure to start fresh
       const error: ZodError = validationResult.error;
       console.warn(
         `Validation failed for ${filePath}: ${error.issues
-          .map((err) => `${err.path.join(".")}: ${err.message}`)
-          .join("; ")}`
+          .map((err) => `${err.path.join('.')}: ${err.message}`)
+          .join('; ')}`
       );
       return { metrics: [] };
     }
@@ -227,16 +251,11 @@ export async function readExistingData(
 }
 
 /**
- * Gets a unique identifier for a metric data item (for deduplication)
- */
-function getItemIdentifier(item: HealthMetricData): string {
-  return item.date || JSON.stringify(item);
-}
-
-/**
  * Extracts keys from a Zod object schema in the order they were defined
  */
-function extractKeysFromZodSchema(schema: z.ZodObject<any> | z.ZodLazy<any>): string[] {
+function extractKeysFromZodSchema(
+  schema: z.ZodObject<any> | z.ZodLazy<any>
+): string[] {
   // Try to access shape directly (works for both z.object() and z.looseObject())
   if ('shape' in schema) {
     const shape = (schema as any).shape;
@@ -250,19 +269,21 @@ function extractKeysFromZodSchema(schema: z.ZodObject<any> | z.ZodLazy<any>): st
       return Object.keys(shape);
     }
   }
-  
+
   return [];
 }
 
 /**
  * Maps metric names to their corresponding data schemas
  */
-const METRIC_TO_DATA_SCHEMA: Record<string, z.ZodObject<any> | z.ZodLazy<any>> = {
-  heart_rate: HeartRateDataSchema,
-  heart_rate_variability: HeartRateVariabilityDataSchema,
-  sleep_analysis: SleepAnalysisDataSchema,
-  body_temperature: BodyTemperatureDataSchema,
-};
+const METRIC_TO_DATA_SCHEMA: Record<string, z.ZodObject<any> | z.ZodLazy<any>> =
+  {
+    heart_rate: HeartRateDataSchema,
+    heart_rate_variability: HeartRateVariabilityDataSchema,
+    sleep_analysis: SleepAnalysisDataSchema,
+    body_temperature: BodyTemperatureDataSchema,
+    resting_heart_rate: RestingHeartRateDataSchema,
+  };
 
 /**
  * Key order for each schema type (dynamically generated from Zod schema definitions)
@@ -288,21 +309,21 @@ function reorderKeysBySchema<T extends Record<string, any>>(
   }
 
   const reordered: any = {};
-  
+
   // Add keys in schema order
   for (const key of keyOrder) {
     if (key in obj) {
       reordered[key] = obj[key];
     }
   }
-  
+
   // Add any remaining keys that weren't in the schema order
   for (const key in obj) {
     if (!(key in reordered)) {
       reordered[key] = obj[key];
     }
   }
-  
+
   return reordered as T;
 }
 
@@ -376,7 +397,7 @@ export async function processMetric(
 
   // Merge with existing data (which may have been cleaned of incomplete entries)
   const mergedMetrics = [...filteredExistingMetrics, ...filteredNewMetrics];
-  
+
   // Sort by date in ascending order for clean commits
   const sortedMetrics = mergedMetrics.sort((a, b) => {
     const dateA = a.date || '';
@@ -396,7 +417,9 @@ export async function processMetric(
   const contentToWrite = JSON.stringify(mergedData, null, 2);
   await writer(filePath, contentToWrite);
 
-  const message = `Saved ${filteredNewMetrics.length} new entries for ${validatedMetric.name} to ${getMetricFilePath(validatedMetric.name, basePath)?.split("/").pop()}`;
+  const message = `Saved ${filteredNewMetrics.length} new entries for ${
+    validatedMetric.name
+  } to ${getMetricFilePath(validatedMetric.name, basePath)?.split('/').pop()}`;
 
   return {
     success: true,
@@ -412,7 +435,7 @@ export async function ingestHealthDataFromIssue(
   writer: WriterFunction,
   reader: ReaderFunction,
   commenter?: CommentFunction,
-  basePath: string = "./vault/healthkit"
+  basePath: string = './vault/healthkit'
 ): Promise<{ success: boolean; message: string }> {
   // Step 1: Validate issue title - silently exit if not meant for us
   const titleValidation = validateIssueTitle(issue.title);
@@ -420,14 +443,14 @@ export async function ingestHealthDataFromIssue(
     // Issue is not meant for us, silently exit without posting anything
     return {
       success: true,
-      message: "Issue not intended for this processor",
+      message: 'Issue not intended for this processor',
     };
   }
 
   // Step 2: Parse health data
   const parseResult = parseHealthData(issue.body);
   if (!parseResult.success || !parseResult.data) {
-    const errorMsg = parseResult.error || "Failed to parse health data";
+    const errorMsg = parseResult.error || 'Failed to parse health data';
     if (commenter) {
       await commenter(`❌ ${errorMsg}`);
     }
@@ -445,12 +468,7 @@ export async function ingestHealthDataFromIssue(
 
   for (const metric of healthData.data.metrics) {
     try {
-      const result = await processMetric(
-        metric,
-        basePath,
-        writer,
-        reader
-      );
+      const result = await processMetric(metric, basePath, writer, reader);
 
       if (result.success) {
         messages.push(result.message);
@@ -458,14 +476,18 @@ export async function ingestHealthDataFromIssue(
         errors.push(result.message);
       }
     } catch (error) {
-      const errorMsg = `Error processing ${metric.name}: ${error instanceof Error ? error.message : String(error)}`;
+      const errorMsg = `Error processing ${metric.name}: ${
+        error instanceof Error ? error.message : String(error)
+      }`;
       errors.push(errorMsg);
     }
   }
 
   // Step 4: Handle results and post comments
   if (errors.length > 0) {
-    const errorMessage = `❌ Encountered errors:\n${errors.map(e => `- ${e}`).join("\n")}`;
+    const errorMessage = `❌ Encountered errors:\n${errors
+      .map((e) => `- ${e}`)
+      .join('\n')}`;
     if (commenter) {
       await commenter(errorMessage);
     }
@@ -475,7 +497,9 @@ export async function ingestHealthDataFromIssue(
     };
   }
 
-  const successMessage = `✅ Successfully ingested health data!\n\n${messages.map(m => `- ${m}`).join("\n")}`;
+  const successMessage = `✅ Successfully ingested health data!\n\n${messages
+    .map((m) => `- ${m}`)
+    .join('\n')}`;
   if (commenter) {
     await commenter(successMessage);
   }
@@ -485,4 +509,3 @@ export async function ingestHealthDataFromIssue(
     message: successMessage,
   };
 }
-
