@@ -1,4 +1,4 @@
-name: "🎫 Handle New Issue"
+name: '🎫 Handle New Issue'
 
 on:
   issues:
@@ -10,14 +10,14 @@ permissions:
 
 jobs:
   process-issue:
-    name: "👷 Process issue"
+    name: '👷 Process issue'
     if: github.event.issue.title == 'HealthDataExport' || github.event.issue.title == 'LocationDataExport'
     runs-on: ubuntu-latest
     steps:
-      - name: "📦 Checkout"
+      - name: '📦 Checkout'
         uses: actions/checkout@v3
 
-      - name: "🏷️ Add processing label"
+      - name: '🏷️ Add processing label'
         uses: actions/github-script@v7
         with:
           script: |
@@ -28,7 +28,7 @@ jobs:
               labels: ['processing']
             })
 
-      - name: "💬 Comment workflow status"
+      - name: '💬 Comment workflow status'
         uses: actions/github-script@v7
         with:
           script: |
@@ -40,15 +40,15 @@ jobs:
               body: `🔄 [Workflow running](${workflowRunUrl})`
             })
 
-      - name: "🍔 Set up Bun"
+      - name: '🍔 Set up Bun'
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
 
-      - name: "✅ Install dependencies"
+      - name: '✅ Install dependencies'
         run: bun install
 
-      - name: "🎫 Process issue data"
+      - name: '🎫 Process issue data'
         env:
           ISSUE_BODY: ${{ github.event.issue.body }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,17 +61,17 @@ jobs:
             --issue-author "${{ github.event.issue.user.login }}" \
             --issue-created-at "${{ github.event.issue.created_at }}"
 
-      - name: "🗄️ Commit vault back to repo"
+      - name: '🗄️ Commit vault back to repo'
         if: success()
         uses: stefanzweifel/git-auto-commit-action@v4.15.4
         with:
-          commit_message: "🤖 Save data to vault"
-          commit_user_name: "0x4444"
-          commit_user_email: "0x4444@users.noreply.github.com"
-          commit_author: "0x4444 <0x4444@users.noreply.github.com>"
+          commit_message: '🤖 Save data to vault'
+          commit_user_name: '0x4444'
+          commit_user_email: '0x4444@users.noreply.github.com'
+          commit_author: '0x4444 <0x4444@users.noreply.github.com>'
           file_pattern: vault/*
 
-      - name: "🏷️ Remove processing label"
+      - name: '🏷️ Remove processing label'
         if: always()
         uses: actions/github-script@v7
         with:
@@ -88,3 +88,14 @@ jobs:
               console.log('Label removal skipped:', error.message);
             }
 
+  trigger-website-deployment:
+    runs-on: ubuntu-latest
+    name: '🎛️ Repo Dispatch Website Deployment'
+    needs: [process-issue]
+    if: success()
+    steps:
+      - uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.TRIGGER_BUILD_SHIVEKKHURANA_DOT_COM }}
+          repository: shivekkhurana/shivekkhurana.com
+          event-type: DEPLOY_WEBSITE
