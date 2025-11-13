@@ -7,6 +7,8 @@ on:
 permissions:
   issues: write
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   process-issue:
@@ -88,14 +90,14 @@ jobs:
               console.log('Label removal skipped:', error.message);
             }
 
-  trigger-website-deployment:
+  trigger-cd:
+    name: '🚀 Trigger CD Pipeline'
     runs-on: ubuntu-latest
-    name: '🎛️ Repo Dispatch Website Deployment'
     needs: [process-issue]
     if: success()
     steps:
       - uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.TRIGGER_BUILD_SHIVEKKHURANA_DOT_COM }}
-          repository: shivekkhurana/shivekkhurana.com
-          event-type: DEPLOY_WEBSITE
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: DEPLOY_VAULT

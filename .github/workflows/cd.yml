@@ -1,15 +1,19 @@
-name: "📦 CD"
+name: '📦 CD'
 
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches: ['master']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
   # Make this callable from other workflows
   workflow_call:
+
+  # Triggered via repository dispatch
+  repository_dispatch:
+    types: [DEPLOY_VAULT]
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -20,34 +24,34 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "state-of-being/pages"
+  group: 'state-of-being/pages'
   cancel-in-progress: false
 
 jobs:
   # Single deploy job since we're just deploying
   deploy:
-    name: "🌎 Deploy Vault"
+    name: '🌎 Deploy Vault'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: "📟 Checkout"
+      - name: '📟 Checkout'
         uses: actions/checkout@v4
-      - name: "🛠️ Setup Pages"
+      - name: '🛠️ Setup Pages'
         uses: actions/configure-pages@v4
-      - name: "📤 Upload artifact"
+      - name: '📤 Upload artifact'
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: "."
-      - name: "🌎 Deploy to GitHub Pages"
+          path: '.'
+      - name: '🌎 Deploy to GitHub Pages'
         id: deployment
         uses: actions/deploy-pages@v4
 
   trigger-website-deployment:
     runs-on: ubuntu-latest
-    name: "🎛️ Repo Dispatch Website Deployment"
+    name: '🎛️ Repo Dispatch Website Deployment'
     needs: [deploy]
     steps:
       - uses: peter-evans/repository-dispatch@v2
