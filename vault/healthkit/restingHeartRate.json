@@ -1295,6 +1295,16 @@
       "qty": 54,
       "date": "2026-05-01 00:00:00 +0530",
       "source": "Ultrahuman"
+    },
+    {
+      "qty": 51,
+      "date": "2026-05-02 00:00:00 +0530",
+      "source": "Ultrahuman"
+    },
+    {
+      "qty": 54,
+      "date": "2026-05-03 00:00:00 +0530",
+      "source": "Ultrahuman"
     }
   ]
 }
