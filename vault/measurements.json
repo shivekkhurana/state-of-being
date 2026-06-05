@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-06-05",
+    "type": "belly",
+    "value": 89,
+    "unit": "cm"
+  },
+  {
+    "date": "2026-06-05",
+    "type": "waist",
+    "value": 84,
+    "unit": "cm"
+  }
+]
