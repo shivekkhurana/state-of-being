@@ -1,5 +1,2749 @@
 [
   {
+    "date": "2015-06-25",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-06-26",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-07-08",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-07-12",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-07-13",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-07-14",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-07-18",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-07-23",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-07-24",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-09-02",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-09-04",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-09-09",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2015-09-19",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-07-19",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-07-20",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-07-22",
+    "note": "NTC Workout; NTC Workout"
+  },
+  {
+    "date": "2016-10-20",
+    "note": "Fleet of Foot"
+  },
+  {
+    "date": "2016-10-21",
+    "note": "Friday Evening Run"
+  },
+  {
+    "date": "2016-10-24",
+    "note": "Zero-to-100"
+  },
+  {
+    "date": "2016-10-26",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2016-10-29",
+    "note": "Saturday Evening Run"
+  },
+  {
+    "date": "2016-10-31",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-01",
+    "note": "Burpees, Bounds & Bridges"
+  },
+  {
+    "date": "2016-11-02",
+    "note": "Wednesday Morning Run"
+  },
+  {
+    "date": "2016-11-03",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-05",
+    "note": "NTC Workout; Controlled Blast"
+  },
+  {
+    "date": "2016-11-07",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-08",
+    "note": "Tuesday Evening Run"
+  },
+  {
+    "date": "2016-11-10",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-13",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-17",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-19",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-20",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-22",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-23",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-11-25",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-01",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-07",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-09",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-12",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-13",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-15",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-17",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-18",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-20",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-22",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-23",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-26",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-28",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2016-12-30",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-01-15",
+    "note": "Sunday Morning Run"
+  },
+  {
+    "date": "2017-01-25",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-01-27",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-02-01",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-02-13",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-02-15",
+    "note": "Centre Out"
+  },
+  {
+    "date": "2017-02-16",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-02-18",
+    "note": "Motionally Stable"
+  },
+  {
+    "date": "2017-02-20",
+    "note": "Wipeout 2.0"
+  },
+  {
+    "date": "2017-02-22",
+    "note": "Burn Through the Core"
+  },
+  {
+    "date": "2017-02-23",
+    "note": "Strong Glutes"
+  },
+  {
+    "date": "2017-02-25",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-02-27",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-03-14",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-03-20",
+    "note": "Best Foot Forward"
+  },
+  {
+    "date": "2017-03-21",
+    "note": "Wake up Warrior"
+  },
+  {
+    "date": "2017-03-23",
+    "note": "Engine Fire"
+  },
+  {
+    "date": "2017-03-27",
+    "note": "Abs & Arms"
+  },
+  {
+    "date": "2017-03-28",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-03-30",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-03-31",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-04-03",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-04-10",
+    "note": "Centre Out"
+  },
+  {
+    "date": "2017-04-12",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-04-17",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-04-19",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-04-26",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-04-27",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-04-28",
+    "note": "Friday Evening Run"
+  },
+  {
+    "date": "2017-05-02",
+    "note": "Motionally Stable"
+  },
+  {
+    "date": "2017-05-16",
+    "note": "Tuesday Evening Run; Monday Evening Run"
+  },
+  {
+    "date": "2017-05-17",
+    "note": "Wednesday Evening Run"
+  },
+  {
+    "date": "2017-06-13",
+    "note": "Tuesday Evening Run"
+  },
+  {
+    "date": "2017-06-26",
+    "note": "The Baseline Push"
+  },
+  {
+    "date": "2017-06-27",
+    "note": "Ascend and Descend"
+  },
+  {
+    "date": "2017-07-06",
+    "note": "Ignition Points"
+  },
+  {
+    "date": "2017-07-11",
+    "note": "Brilliant Speed"
+  },
+  {
+    "date": "2017-07-14",
+    "note": "Glutes & Glory"
+  },
+  {
+    "date": "2017-07-22",
+    "note": "Turn and Burn"
+  },
+  {
+    "date": "2017-07-25",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-08-18",
+    "note": "Zero-to-100"
+  },
+  {
+    "date": "2017-08-21",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-08-22",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-08-24",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-08-26",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-09-16",
+    "note": "The Baseline Push"
+  },
+  {
+    "date": "2017-09-18",
+    "note": "Gym (misc.); Engine Fire"
+  },
+  {
+    "date": "2017-09-19",
+    "note": "The Tempo Game"
+  },
+  {
+    "date": "2017-09-21",
+    "note": "Turn and Burn"
+  },
+  {
+    "date": "2017-09-22",
+    "note": "Leg-pocalypse Now"
+  },
+  {
+    "date": "2017-09-25",
+    "note": "Speed Round"
+  },
+  {
+    "date": "2017-09-26",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-09-27",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-09-28",
+    "note": "Thursday Evening Run"
+  },
+  {
+    "date": "2017-09-29",
+    "note": "Leaner Legs 2.0"
+  },
+  {
+    "date": "2017-10-03",
+    "note": "Monday Afternoon Run"
+  },
+  {
+    "date": "2017-10-24",
+    "note": "Tuesday Evening Run"
+  },
+  {
+    "date": "2017-11-04",
+    "note": "Saturday Morning Run"
+  },
+  {
+    "date": "2017-11-10",
+    "note": "Friday Morning Run"
+  },
+  {
+    "date": "2017-11-21",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-11-23",
+    "note": "Zero to 100"
+  },
+  {
+    "date": "2017-11-24",
+    "note": "Slim Chance 2.0"
+  },
+  {
+    "date": "2017-12-06",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-12-08",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2017-12-20",
+    "note": "Slim Chance 2.0"
+  },
+  {
+    "date": "2017-12-29",
+    "note": "Peaks and Valleys"
+  },
+  {
+    "date": "2018-01-03",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-01-05",
+    "note": "The Up Shift"
+  },
+  {
+    "date": "2018-01-08",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2018-01-09",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-01-16",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-01-18",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-01-22",
+    "note": "NTC Workout; NTC Workout"
+  },
+  {
+    "date": "2018-01-23",
+    "note": "The Up Shift"
+  },
+  {
+    "date": "2018-01-29",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2018-01-31",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-02-02",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2018-02-12",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-02-13",
+    "note": "Tuesday Morning Run"
+  },
+  {
+    "date": "2018-02-14",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-02-15",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-02-16",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-02-18",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-02-19",
+    "note": "Monday Morning Run"
+  },
+  {
+    "date": "2018-02-20",
+    "note": "NTC Workout; NTC Workout"
+  },
+  {
+    "date": "2018-02-22",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-02-24",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-02-26",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-02-27",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-03-01",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-03-02",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-03-10",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-03-14",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-03-18",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-03-19",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-03-25",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-03-27",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-04-02",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-04-05",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-04-09",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-04-10",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-04-12",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-04-14",
+    "note": "The Circuit Breaker"
+  },
+  {
+    "date": "2018-04-16",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2018-04-17",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-04-18",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-04-19",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-04-20",
+    "note": "Turn and Burn"
+  },
+  {
+    "date": "2018-04-23",
+    "note": "The Circuit Breaker"
+  },
+  {
+    "date": "2018-04-24",
+    "note": "Motionally Stable"
+  },
+  {
+    "date": "2018-04-25",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2018-04-26",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-05-01",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-05-02",
+    "note": "Burpees, Bounds & Bridges"
+  },
+  {
+    "date": "2018-05-03",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2018-05-04",
+    "note": "Core Crunch 2.0"
+  },
+  {
+    "date": "2018-05-07",
+    "note": "Burn I hrough the Core"
+  },
+  {
+    "date": "2018-05-08",
+    "note": "Peaks and Valleys"
+  },
+  {
+    "date": "2018-05-10",
+    "note": "Crunch and Burn 2.0"
+  },
+  {
+    "date": "2018-05-11",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-05-14",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-05-16",
+    "note": "The Up Shift"
+  },
+  {
+    "date": "2018-05-17",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2018-05-21",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-05-22",
+    "note": "The Circuit Breaker"
+  },
+  {
+    "date": "2018-05-24",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-05-25",
+    "note": "Peaks and Valleys"
+  },
+  {
+    "date": "2018-05-31",
+    "note": "Runner Warm Up"
+  },
+  {
+    "date": "2018-06-04",
+    "note": "Upper Body Sculpt"
+  },
+  {
+    "date": "2018-06-06",
+    "note": "Runner Warm Up"
+  },
+  {
+    "date": "2018-06-07",
+    "note": "Full Body Dumbbell Circuit"
+  },
+  {
+    "date": "2018-06-18",
+    "note": "Upper Body Sculpt"
+  },
+  {
+    "date": "2018-06-19",
+    "note": "Strong Glutes"
+  },
+  {
+    "date": "2018-06-20",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-06-21",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-06-25",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-06-28",
+    "note": "Glute Toner"
+  },
+  {
+    "date": "2018-07-04",
+    "note": "Jump Start"
+  },
+  {
+    "date": "2018-07-13",
+    "note": "Strong Glutes"
+  },
+  {
+    "date": "2018-07-20",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-07-23",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-08-06",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-08-07",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-08-08",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-08-10",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-08-16",
+    "note": "Centre Out"
+  },
+  {
+    "date": "2018-08-22",
+    "note": "Dumbbell Full-Body Burner"
+  },
+  {
+    "date": "2018-08-24",
+    "note": "Motionally Stable"
+  },
+  {
+    "date": "2018-08-27",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2018-09-03",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2018-09-04",
+    "note": "Cut to the Core"
+  },
+  {
+    "date": "2018-10-11",
+    "note": "Dumbbell Full-Body Burner"
+  },
+  {
+    "date": "2018-10-12",
+    "note": "Friday Evening Run"
+  },
+  {
+    "date": "2018-10-15",
+    "note": "The Fast Forward"
+  },
+  {
+    "date": "2018-10-16",
+    "note": "Turn and Burn"
+  },
+  {
+    "date": "2018-10-23",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-10-24",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-10-25",
+    "note": "Zero-to-100"
+  },
+  {
+    "date": "2018-10-31",
+    "note": "Go, Rest, Repeat"
+  },
+  {
+    "date": "2018-11-02",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2018-11-06",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-11-12",
+    "note": "Motionally Stable"
+  },
+  {
+    "date": "2018-11-13",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-11-19",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-11-26",
+    "note": "Motionally Stable"
+  },
+  {
+    "date": "2018-11-28",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-12-03",
+    "note": "Monday Morning Run"
+  },
+  {
+    "date": "2018-12-04",
+    "note": "Tuesday Morning Run"
+  },
+  {
+    "date": "2018-12-05",
+    "note": "Wednesday Morning Run"
+  },
+  {
+    "date": "2018-12-17",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2018-12-19",
+    "note": "Jump Start"
+  },
+  {
+    "date": "2018-12-26",
+    "note": "The Fast Forward"
+  },
+  {
+    "date": "2018-12-29",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-01-08",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-01-14",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-01-16",
+    "note": "Full-Body Goal Crusher"
+  },
+  {
+    "date": "2019-01-17",
+    "note": "5-Minute Plank Finisher"
+  },
+  {
+    "date": "2019-01-22",
+    "note": "Runner Warm Up"
+  },
+  {
+    "date": "2019-02-04",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-02-05",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-02-26",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2019-03-13",
+    "note": "Wednesday Evening Run"
+  },
+  {
+    "date": "2019-03-16",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-04-21",
+    "note": "Go, Rest, Repeat"
+  },
+  {
+    "date": "2019-05-24",
+    "note": "Quick Core Crush"
+  },
+  {
+    "date": "2019-08-05",
+    "note": "Burpees, Bounds & Bridges"
+  },
+  {
+    "date": "2019-08-06",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-08-07",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-08-09",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2019-08-10",
+    "note": "Go, Rest, Repeat"
+  },
+  {
+    "date": "2019-08-12",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2019-08-14",
+    "note": "The Circuit Breaker"
+  },
+  {
+    "date": "2019-08-16",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-08-19",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2019-08-20",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-08-22",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-08-27",
+    "note": "Controlled Blast"
+  },
+  {
+    "date": "2019-08-28",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-08-30",
+    "note": "Boxer Burner"
+  },
+  {
+    "date": "2019-08-31",
+    "note": "Cut to the Core"
+  },
+  {
+    "date": "2019-09-07",
+    "note": "Cut to the Core"
+  },
+  {
+    "date": "2019-09-08",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2019-09-12",
+    "note": "The Circuit Breaker"
+  },
+  {
+    "date": "2019-09-14",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-09-19",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2019-10-14",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2019-10-16",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2019-10-21",
+    "note": "Fleet of Foot"
+  },
+  {
+    "date": "2019-10-22",
+    "note": "NTC Workout; Fleet of Foot"
+  },
+  {
+    "date": "2019-10-23",
+    "note": "Cut to the Core"
+  },
+  {
+    "date": "2019-10-25",
+    "note": "Zero-to-100"
+  },
+  {
+    "date": "2019-12-02",
+    "note": "High-Powered Legs"
+  },
+  {
+    "date": "2019-12-03",
+    "note": "Upper Body Sculpt"
+  },
+  {
+    "date": "2019-12-09",
+    "note": "Boxer Arms"
+  },
+  {
+    "date": "2020-02-11",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2020-02-12",
+    "note": "20-Minute Strength Kickstarter"
+  },
+  {
+    "date": "2020-02-14",
+    "note": "Leg-pocalypse Now"
+  },
+  {
+    "date": "2020-02-15",
+    "note": "Shoulder Shaper"
+  },
+  {
+    "date": "2020-02-20",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2020-02-22",
+    "note": "Wipeout 2.0"
+  },
+  {
+    "date": "2020-02-23",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2020-02-25",
+    "note": "Ab And Butt 2.0"
+  },
+  {
+    "date": "2020-02-26",
+    "note": "The Perfect 10"
+  },
+  {
+    "date": "2020-02-27",
+    "note": "Floor to Core"
+  },
+  {
+    "date": "2020-02-28",
+    "note": "Burn Through the Core"
+  },
+  {
+    "date": "2020-02-29",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2020-03-03",
+    "note": "Full Body Dumbbell Circuit"
+  },
+  {
+    "date": "2020-03-04",
+    "note": "Crunch and Burn 2.0"
+  },
+  {
+    "date": "2020-03-06",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2020-03-23",
+    "note": "Opening Time"
+  },
+  {
+    "date": "2020-03-29",
+    "note": "Lower Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2020-03-30",
+    "note": "Breakthrough HIT & Core 1"
+  },
+  {
+    "date": "2020-03-31",
+    "note": "Upper Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2020-04-02",
+    "note": "Calm & Focused Yoga; Calm & Focused Yoga"
+  },
+  {
+    "date": "2020-04-03",
+    "note": "Breakthrough HIT & Flow 1"
+  },
+  {
+    "date": "2020-04-06",
+    "note": "Lower Body Strength Breakthrough 2"
+  },
+  {
+    "date": "2020-04-07",
+    "note": "Breakthrough HIT & Core 2"
+  },
+  {
+    "date": "2020-04-08",
+    "note": "Upper Body Strength Breakthrough 2"
+  },
+  {
+    "date": "2020-04-09",
+    "note": "Strength & Balance Yoga"
+  },
+  {
+    "date": "2020-04-11",
+    "note": "Breakthrough HIT & Flow 2"
+  },
+  {
+    "date": "2020-04-16",
+    "note": "Lower Body Strength Breakthrough 3"
+  },
+  {
+    "date": "2020-04-17",
+    "note": "Breakthrough HIT & Core 3"
+  },
+  {
+    "date": "2020-04-20",
+    "note": "Upper Body Strength Breakthrough 3"
+  },
+  {
+    "date": "2020-04-21",
+    "note": "Breakthrough HIT & Flow 3; Slow & Restorative Yoga"
+  },
+  {
+    "date": "2020-04-22",
+    "note": "Lower Body Strength Breakthrough 4"
+  },
+  {
+    "date": "2020-04-23",
+    "note": "Breakthrough HIT & Core 4"
+  },
+  {
+    "date": "2020-04-24",
+    "note": "Breakthrough HIT & Core 4; Breakthrough HIT & Core 4"
+  },
+  {
+    "date": "2020-04-25",
+    "note": "Upper Body Strength Breakthrough 4"
+  },
+  {
+    "date": "2020-04-26",
+    "note": "Energetic & Fiery Yoga"
+  },
+  {
+    "date": "2020-04-27",
+    "note": "Breakthrough Challenge; Breakthrough HIT & Flow 4; Breakthrough HIT & Flow 4"
+  },
+  {
+    "date": "2020-05-01",
+    "note": "Upper-Body and Core Sizzler 1"
+  },
+  {
+    "date": "2020-05-02",
+    "note": "Lower-Body Burn 1; Lower-Body Burn 1"
+  },
+  {
+    "date": "2020-05-03",
+    "note": "Total-Body Blast 1"
+  },
+  {
+    "date": "2020-05-04",
+    "note": "Upper-Body and Core Sizzler 2"
+  },
+  {
+    "date": "2020-05-05",
+    "note": "Lower-Body Burn 2"
+  },
+  {
+    "date": "2020-05-07",
+    "note": "Total-Body Blast 2"
+  },
+  {
+    "date": "2020-05-08",
+    "note": "Upper-Body and Core Sizzler 3"
+  },
+  {
+    "date": "2020-05-09",
+    "note": "Lower-Body Burn 3; Lower-Body Burn 3; Athletic Core"
+  },
+  {
+    "date": "2020-05-11",
+    "note": "Total-Body Blast 3"
+  },
+  {
+    "date": "2020-05-13",
+    "note": "Upper-Body and Core Sizzler 4"
+  },
+  {
+    "date": "2020-05-14",
+    "note": "Lower-Body Burn 4"
+  },
+  {
+    "date": "2020-05-15",
+    "note": "Total-Body Blast 4"
+  },
+  {
+    "date": "2020-05-17",
+    "note": "Lower-Body Burn 5; Upper-Body and Core Sizzler 5"
+  },
+  {
+    "date": "2020-05-19",
+    "note": "Wind-Down Yoga Flow"
+  },
+  {
+    "date": "2020-05-20",
+    "note": "Total-Body Blast 5"
+  },
+  {
+    "date": "2020-05-21",
+    "note": "Upper-Body and Core Sizzler 6"
+  },
+  {
+    "date": "2020-05-23",
+    "note": "Lower-Body Burn 6"
+  },
+  {
+    "date": "2020-05-24",
+    "note": "Ignite & Inspire with Kirsty Godso; Total-Body Blast 6"
+  },
+  {
+    "date": "2020-06-01",
+    "note": "Total Body Strength Essentials"
+  },
+  {
+    "date": "2020-06-02",
+    "note": "Strength & Core Foundations"
+  },
+  {
+    "date": "2020-06-03",
+    "note": "Leg & Glute Essentials"
+  },
+  {
+    "date": "2020-06-04",
+    "note": "Push & Pull Basics"
+  },
+  {
+    "date": "2020-06-08",
+    "note": "Shoulder & Core Essentials"
+  },
+  {
+    "date": "2020-06-09",
+    "note": "Glute & Leg Strength"
+  },
+  {
+    "date": "2020-06-13",
+    "note": "Full Body Strength & HIT; Full Body Strength & HIT"
+  },
+  {
+    "date": "2020-06-14",
+    "note": "Slow Arm & Core Burn"
+  },
+  {
+    "date": "2020-06-17",
+    "note": "Glute, Leg & Core Strength"
+  },
+  {
+    "date": "2020-06-22",
+    "note": "Full Body Circuit"
+  },
+  {
+    "date": "2020-06-23",
+    "note": "Active Arms & Abs"
+  },
+  {
+    "date": "2020-06-25",
+    "note": "Full Body Fit"
+  },
+  {
+    "date": "2020-06-26",
+    "note": "Core & Legs Combo"
+  },
+  {
+    "date": "2020-06-28",
+    "note": "Kick Off with Betina Gozo; Max Out HIT"
+  },
+  {
+    "date": "2020-06-29",
+    "note": "Cardio & Legs HIT"
+  },
+  {
+    "date": "2020-07-01",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2020-07-02",
+    "note": "Cardio & Core Burn"
+  },
+  {
+    "date": "2020-07-03",
+    "note": "Body & Mind Unwind"
+  },
+  {
+    "date": "2020-07-05",
+    "note": "Quick Core & Glutes"
+  },
+  {
+    "date": "2020-07-06",
+    "note": "Calm & Focused Yoga"
+  },
+  {
+    "date": "2020-07-08",
+    "note": "Core & Glute Stability"
+  },
+  {
+    "date": "2020-07-10",
+    "note": "Core & Cardio Scorcher"
+  },
+  {
+    "date": "2020-07-11",
+    "note": "Full Body Cardio Burn"
+  },
+  {
+    "date": "2020-07-14",
+    "note": "Steady Strength & Power"
+  },
+  {
+    "date": "2020-07-15",
+    "note": "Full Body & Core Endurance"
+  },
+  {
+    "date": "2020-07-16",
+    "note": "Fiery Yoga Flow"
+  },
+  {
+    "date": "2020-07-17",
+    "note": "Full Body Cardio Crush"
+  },
+  {
+    "date": "2020-07-18",
+    "note": "Ultimate Cardio Burn"
+  },
+  {
+    "date": "2020-07-21",
+    "note": "Leg Power-Up"
+  },
+  {
+    "date": "2020-07-22",
+    "note": "Upper Body Strength with HIT"
+  },
+  {
+    "date": "2020-07-24",
+    "note": "Fiery Cardio with Core"
+  },
+  {
+    "date": "2020-07-25",
+    "note": "Legs & Glutes HIT"
+  },
+  {
+    "date": "2020-07-27",
+    "note": "Speed & Strength Combo"
+  },
+  {
+    "date": "2020-07-29",
+    "note": "Max Cardio Burn"
+  },
+  {
+    "date": "2020-07-30",
+    "note": "Core & Cardio Combo"
+  },
+  {
+    "date": "2020-08-01",
+    "note": "Burn with Kirsty Godso; Speed & Strength Smash"
+  },
+  {
+    "date": "2020-08-03",
+    "note": "Upper Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2020-08-04",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2020-08-05",
+    "note": "Active Mobility & Recovery"
+  },
+  {
+    "date": "2020-08-07",
+    "note": "Upper Body Strength Breakthrough 2"
+  },
+  {
+    "date": "2020-08-08",
+    "note": "Leg and Glute Burner"
+  },
+  {
+    "date": "2020-08-11",
+    "note": "Upper Body Strength Breakthrough 3"
+  },
+  {
+    "date": "2020-08-12",
+    "note": "Upper Body Strength Breakthrough 4"
+  },
+  {
+    "date": "2020-08-13",
+    "note": "Body & Mind Unwind"
+  },
+  {
+    "date": "2020-08-14",
+    "note": "12-minute: Arms and Abs; Upper-Body and Core Sizzler 1"
+  },
+  {
+    "date": "2020-08-15",
+    "note": "Lower-Body Burn 1"
+  },
+  {
+    "date": "2020-08-18",
+    "note": "Total-Body Blast 1"
+  },
+  {
+    "date": "2020-08-19",
+    "note": "Upper-Body and Core Sizzler 2"
+  },
+  {
+    "date": "2020-08-20",
+    "note": "Lower-Body Burn 2"
+  },
+  {
+    "date": "2020-08-21",
+    "note": "Total-Body Blast 2"
+  },
+  {
+    "date": "2020-08-22",
+    "note": "Upper-Body and Core Sizzler 3"
+  },
+  {
+    "date": "2020-08-24",
+    "note": "Lower-Body Burn 3"
+  },
+  {
+    "date": "2020-08-25",
+    "note": "Total-Body Blast 3"
+  },
+  {
+    "date": "2020-08-27",
+    "note": "Upper-Body and Core Sizzler 4"
+  },
+  {
+    "date": "2020-08-28",
+    "note": "Lower-Body Burn 4"
+  },
+  {
+    "date": "2020-08-30",
+    "note": "Total-Body Blast 4"
+  },
+  {
+    "date": "2020-08-31",
+    "note": "Upper-Body and Core Sizzler 5"
+  },
+  {
+    "date": "2020-09-02",
+    "note": "Lower-Body Burn 5"
+  },
+  {
+    "date": "2020-09-03",
+    "note": "Total-Body Blast 5"
+  },
+  {
+    "date": "2020-09-04",
+    "note": "Upper-Body and Core Sizzler 6"
+  },
+  {
+    "date": "2020-09-05",
+    "note": "Lower-Body Burn 6"
+  },
+  {
+    "date": "2020-09-12",
+    "note": "Ignite & Inspire with Kirsty Godso; Total-Body Blast 6"
+  },
+  {
+    "date": "2020-09-14",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2020-09-17",
+    "note": "Upper-Body and Core Sizzler 2"
+  },
+  {
+    "date": "2020-09-18",
+    "note": "Total Body Strength Essentials"
+  },
+  {
+    "date": "2020-09-20",
+    "note": "Strength & Core Foundations"
+  },
+  {
+    "date": "2020-09-21",
+    "note": "Leg & Glute Essentials"
+  },
+  {
+    "date": "2020-09-22",
+    "note": "Push & Pull Basics"
+  },
+  {
+    "date": "2020-09-23",
+    "note": "Shoulder & Core Essentials"
+  },
+  {
+    "date": "2020-09-24",
+    "note": "Glute & Leg Strength; Glute & Leg Strength"
+  },
+  {
+    "date": "2020-09-25",
+    "note": "Full Body Strength & HIT"
+  },
+  {
+    "date": "2020-09-29",
+    "note": "Slow Arm & Core Burn"
+  },
+  {
+    "date": "2020-10-04",
+    "note": "Glute, Leg & Core Strength"
+  },
+  {
+    "date": "2020-10-06",
+    "note": "Full Body Circuit"
+  },
+  {
+    "date": "2020-10-07",
+    "note": "Active Arms & Abs"
+  },
+  {
+    "date": "2020-10-08",
+    "note": "Full Body Fit"
+  },
+  {
+    "date": "2020-10-09",
+    "note": "Core & Legs Combo"
+  },
+  {
+    "date": "2020-10-11",
+    "note": "Max Out HIT"
+  },
+  {
+    "date": "2020-10-13",
+    "note": "Kick Off with Betina Gozo"
+  },
+  {
+    "date": "2020-10-14",
+    "note": "Rise & Flow Yoga; Rise & Flow Yoga"
+  },
+  {
+    "date": "2020-10-16",
+    "note": "Quick Heat Yoga Flow"
+  },
+  {
+    "date": "2020-10-17",
+    "note": "Upper Body Strength with HIT"
+  },
+  {
+    "date": "2020-10-19",
+    "note": "Smokin' Shoulders"
+  },
+  {
+    "date": "2020-10-20",
+    "note": "Lower Body HIT & Hips"
+  },
+  {
+    "date": "2020-10-21",
+    "note": "Kickboxing Basics"
+  },
+  {
+    "date": "2020-10-23",
+    "note": "Nontraditional Strength"
+  },
+  {
+    "date": "2020-10-24",
+    "note": "Upper-Body and Core Sizzler 1"
+  },
+  {
+    "date": "2020-10-26",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2020-10-28",
+    "note": "Breakthrough HIT & Flow 1"
+  },
+  {
+    "date": "2020-10-29",
+    "note": "Upper Body Strength with HIT"
+  },
+  {
+    "date": "2020-10-30",
+    "note": "Lower Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2020-10-31",
+    "note": "Core Strength Yoga"
+  },
+  {
+    "date": "2020-11-03",
+    "note": "HIT & Kick"
+  },
+  {
+    "date": "2020-11-04",
+    "note": "Lower Body Strength Breakthrough 2"
+  },
+  {
+    "date": "2020-11-05",
+    "note": "Calm & Focused Yoga"
+  },
+  {
+    "date": "2020-11-07",
+    "note": "Upper Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2020-11-09",
+    "note": "Strength & Plyo"
+  },
+  {
+    "date": "2020-11-11",
+    "note": "Power & Pre-Hab"
+  },
+  {
+    "date": "2020-11-12",
+    "note": "Back-to-Back Core; Back-to-Back Core"
+  },
+  {
+    "date": "2020-11-13",
+    "note": "Endurance & HIT"
+  },
+  {
+    "date": "2020-11-16",
+    "note": "Strength & Plyo"
+  },
+  {
+    "date": "2020-11-17",
+    "note": "Power & Pre-Hab"
+  },
+  {
+    "date": "2020-11-18",
+    "note": "Endurance & HIT"
+  },
+  {
+    "date": "2020-11-20",
+    "note": "Strength & Conditioning"
+  },
+  {
+    "date": "2020-11-24",
+    "note": "Power & Contrast Training"
+  },
+  {
+    "date": "2020-11-26",
+    "note": "Endurance & Unilateral Training"
+  },
+  {
+    "date": "2020-11-28",
+    "note": "Strength & Conditioning"
+  },
+  {
+    "date": "2020-11-30",
+    "note": "Power & Contrast Training"
+  },
+  {
+    "date": "2020-12-02",
+    "note": "Endurance & Unilateral Training"
+  },
+  {
+    "date": "2020-12-04",
+    "note": "Strength & Cardio"
+  },
+  {
+    "date": "2020-12-05",
+    "note": "Power & Control"
+  },
+  {
+    "date": "2020-12-08",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2020-12-09",
+    "note": "Endurance & Dynamic Strength"
+  },
+  {
+    "date": "2020-12-12",
+    "note": "Strength & Cardio"
+  },
+  {
+    "date": "2020-12-14",
+    "note": "Power & Control"
+  },
+  {
+    "date": "2020-12-16",
+    "note": "Endurance & Dynamic Strength"
+  },
+  {
+    "date": "2020-12-17",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2020-12-20",
+    "note": "Strength & Compound Movements"
+  },
+  {
+    "date": "2020-12-22",
+    "note": "Power & Unilateral Training"
+  },
+  {
+    "date": "2020-12-23",
+    "note": "Endurance & Skill Strength"
+  },
+  {
+    "date": "2020-12-29",
+    "note": "Strength & Compound Movements"
+  },
+  {
+    "date": "2020-12-30",
+    "note": "Power & Unilateral Training"
+  },
+  {
+    "date": "2020-12-31",
+    "note": "Advance with Joe Holder; Endurance & Skill Strength"
+  },
+  {
+    "date": "2021-01-05",
+    "note": "Strength & Core Foundations; Total Body Strength Essentials"
+  },
+  {
+    "date": "2021-01-07",
+    "note": "Push & Pull Basics; Leg & Glute Essentials"
+  },
+  {
+    "date": "2021-01-08",
+    "note": "Glute & Leg Strength; Shoulder & Core Essentials"
+  },
+  {
+    "date": "2021-01-13",
+    "note": "Full Body Strength & HIT"
+  },
+  {
+    "date": "2021-01-14",
+    "note": "Slow Arm & Core Burn"
+  },
+  {
+    "date": "2021-01-18",
+    "note": "Full Body Circuit; Glute, Leg & Core Strength"
+  },
+  {
+    "date": "2021-01-20",
+    "note": "Active Arms & Abs"
+  },
+  {
+    "date": "2021-01-21",
+    "note": "Core & Legs Combo; Full Body Fit"
+  },
+  {
+    "date": "2021-01-24",
+    "note": "Max Out HIT"
+  },
+  {
+    "date": "2021-01-25",
+    "note": "HIT & Kick; Kick Off with Betina Gozo"
+  },
+  {
+    "date": "2021-01-31",
+    "note": "Nontraditional Strength"
+  },
+  {
+    "date": "2021-02-01",
+    "note": "Total-Body Blast 3"
+  },
+  {
+    "date": "2021-02-02",
+    "note": "Upper-Body and Core Sizzler 5"
+  },
+  {
+    "date": "2021-02-03",
+    "note": "Breakthrough HIT & Flow 1"
+  },
+  {
+    "date": "2021-02-04",
+    "note": "Smokin' Shoulders"
+  },
+  {
+    "date": "2021-02-06",
+    "note": "Lower-Body Burn 1"
+  },
+  {
+    "date": "2021-02-09",
+    "note": "Upper Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2021-02-10",
+    "note": "Lower-Body Burn 2"
+  },
+  {
+    "date": "2021-02-11",
+    "note": "Speed & Strength Smash"
+  },
+  {
+    "date": "2021-02-17",
+    "note": "Upper Body Strength Breakthrough 4"
+  },
+  {
+    "date": "2021-02-18",
+    "note": "25-Min Yoga: Restorative Flow"
+  },
+  {
+    "date": "2021-02-22",
+    "note": "Speed & Strength Smash"
+  },
+  {
+    "date": "2021-02-23",
+    "note": "Upper-Body and Core Sizzler 6"
+  },
+  {
+    "date": "2021-02-24",
+    "note": "Upper-Body and Core Sizzler 3"
+  },
+  {
+    "date": "2021-02-27",
+    "note": "Fluid Strength & Stability"
+  },
+  {
+    "date": "2021-03-01",
+    "note": "Shoulder & Core Essentials"
+  },
+  {
+    "date": "2021-03-02",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2021-03-04",
+    "note": "Total Body Strength Essentials"
+  },
+  {
+    "date": "2021-03-05",
+    "note": "Strength & Core Foundations"
+  },
+  {
+    "date": "2021-03-08",
+    "note": "Leg & Glute Essentials"
+  },
+  {
+    "date": "2021-03-09",
+    "note": "Push & Pull Basics"
+  },
+  {
+    "date": "2021-03-12",
+    "note": "Shoulder & Core Essentials; Shoulder & Core Essentials"
+  },
+  {
+    "date": "2021-03-13",
+    "note": "Glute & Leg Strength"
+  },
+  {
+    "date": "2021-03-16",
+    "note": "Full Body Strength & HIT"
+  },
+  {
+    "date": "2021-03-19",
+    "note": "Slow Arm & Core Burn"
+  },
+  {
+    "date": "2021-03-20",
+    "note": "Glute, Leg & Core Strength"
+  },
+  {
+    "date": "2021-03-22",
+    "note": "Full Body Circuit"
+  },
+  {
+    "date": "2021-03-23",
+    "note": "Active Arms & Abs"
+  },
+  {
+    "date": "2021-03-24",
+    "note": "Full Body Fit"
+  },
+  {
+    "date": "2021-03-25",
+    "note": "Core & Legs Combo"
+  },
+  {
+    "date": "2021-03-26",
+    "note": "Core & Legs Combo"
+  },
+  {
+    "date": "2021-03-29",
+    "note": "Kick Off with Betina Gozo; Max Out HIT"
+  },
+  {
+    "date": "2021-04-03",
+    "note": "Total Body Conditioning 1"
+  },
+  {
+    "date": "2021-04-05",
+    "note": "Strength Endurance Builder 1"
+  },
+  {
+    "date": "2021-04-06",
+    "note": "Upper-Body and Core Sizzler 1"
+  },
+  {
+    "date": "2021-04-07",
+    "note": "Endurance & Core Strength 1"
+  },
+  {
+    "date": "2021-04-09",
+    "note": "Total Body Conditioning 2"
+  },
+  {
+    "date": "2021-04-11",
+    "note": "Strength Endurance Builder 2"
+  },
+  {
+    "date": "2021-04-15",
+    "note": "Endurance & Core Strength 2"
+  },
+  {
+    "date": "2021-04-18",
+    "note": "Heavy Strength & Conditioning"
+  },
+  {
+    "date": "2021-04-20",
+    "note": "Strength, Stability & Conditioning"
+  },
+  {
+    "date": "2021-04-21",
+    "note": "Strength & Endurance Combo"
+  },
+  {
+    "date": "2021-04-22",
+    "note": "Active Mobility & Recovery"
+  },
+  {
+    "date": "2021-04-27",
+    "note": "Total Body Stability & Strength"
+  },
+  {
+    "date": "2021-04-28",
+    "note": "Conditioning & Dynamic Core"
+  },
+  {
+    "date": "2021-04-30",
+    "note": "Full Body Compound Strength"
+  },
+  {
+    "date": "2021-05-04",
+    "note": "Cardio Intervals & Core"
+  },
+  {
+    "date": "2021-05-05",
+    "note": "Sprints & Bodyweight Burnout"
+  },
+  {
+    "date": "2021-05-06",
+    "note": "Lower Body Strength & Power"
+  },
+  {
+    "date": "2021-05-10",
+    "note": "Bike Sprints & Strength Ladder"
+  },
+  {
+    "date": "2021-05-11",
+    "note": "Bike Sprints & Strength Ladder"
+  },
+  {
+    "date": "2021-05-12",
+    "note": "Upper Body Strength & Power"
+  },
+  {
+    "date": "2021-05-22",
+    "note": "Upper Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2021-05-23",
+    "note": "Upper Body Strength Breakthrough 2"
+  },
+  {
+    "date": "2021-05-26",
+    "note": "Upper Body Strength Breakthrough 3"
+  },
+  {
+    "date": "2021-05-28",
+    "note": "Upper-Body and Core Sizzler 1"
+  },
+  {
+    "date": "2021-05-30",
+    "note": "Powerhouse Glutes"
+  },
+  {
+    "date": "2021-05-31",
+    "note": "Upper-Body and Core Sizzler 5"
+  },
+  {
+    "date": "2021-06-01",
+    "note": "Upper Body Strength Breakthrough 4; Level Up with Joe Holder"
+  },
+  {
+    "date": "2021-06-02",
+    "note": "25-Min Yoga: Restorative Flow"
+  },
+  {
+    "date": "2021-06-03",
+    "note": "Upper Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2021-06-04",
+    "note": "Upper Body Strength Breakthrough 2"
+  },
+  {
+    "date": "2021-06-05",
+    "note": "Gym (misc.); 20-Min HIT: Glutes"
+  },
+  {
+    "date": "2021-06-07",
+    "note": "Active Recovery Yoga"
+  },
+  {
+    "date": "2021-06-08",
+    "note": "HIT & Kick"
+  },
+  {
+    "date": "2021-06-09",
+    "note": "Lower-Body Burn 1"
+  },
+  {
+    "date": "2021-06-10",
+    "note": "Steady Strength & Power"
+  },
+  {
+    "date": "2021-06-13",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2021-06-14",
+    "note": "Push & Pull Basics"
+  },
+  {
+    "date": "2021-06-16",
+    "note": "Powerhouse Glutes"
+  },
+  {
+    "date": "2021-06-17",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2021-06-28",
+    "note": "Lower Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2021-06-29",
+    "note": "Breakthrough HIT & Core 1"
+  },
+  {
+    "date": "2021-07-01",
+    "note": "Upper Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2021-07-02",
+    "note": "Calm & Focused Yoga"
+  },
+  {
+    "date": "2021-07-04",
+    "note": "Breakthrough HIT & Flow 1"
+  },
+  {
+    "date": "2021-07-06",
+    "note": "Lower Body Strength Breakthrough 2"
+  },
+  {
+    "date": "2021-07-07",
+    "note": "Breakthrough HIT & Core 2"
+  },
+  {
+    "date": "2021-07-08",
+    "note": "Upper Body Strength Breakthrough 2"
+  },
+  {
+    "date": "2021-07-10",
+    "note": "Breakthrough HIT & Flow 2"
+  },
+  {
+    "date": "2021-07-12",
+    "note": "Lower Body Strength Breakthrough 3"
+  },
+  {
+    "date": "2021-07-14",
+    "note": "Breakthrough HIT & Core 3"
+  },
+  {
+    "date": "2021-07-15",
+    "note": "Push & Pull Basics"
+  },
+  {
+    "date": "2021-07-16",
+    "note": "Upper Body Strength Breakthrough 3"
+  },
+  {
+    "date": "2021-07-26",
+    "note": "Breakthrough HIT & Flow 3"
+  },
+  {
+    "date": "2021-07-27",
+    "note": "Lower Body Strength Breakthrough 4"
+  },
+  {
+    "date": "2021-07-28",
+    "note": "Breakthrough HIT & Core 4"
+  },
+  {
+    "date": "2021-07-29",
+    "note": "Gym (misc.); Slow & Restorative Yoga"
+  },
+  {
+    "date": "2021-07-31",
+    "note": "Upper Body Strength Breakthrough 4"
+  },
+  {
+    "date": "2021-08-01",
+    "note": "Energetic & Fiery Yoga"
+  },
+  {
+    "date": "2021-08-02",
+    "note": "Gym (misc.); Breakthrough HIT & Flow 4"
+  },
+  {
+    "date": "2021-08-03",
+    "note": "Breakthrough Challenge"
+  },
+  {
+    "date": "2021-08-04",
+    "note": "Cardio & Legs HIT"
+  },
+  {
+    "date": "2021-08-07",
+    "note": "Cardio & Core Burn"
+  },
+  {
+    "date": "2021-08-11",
+    "note": "Quick Core & Glutes"
+  },
+  {
+    "date": "2021-08-12",
+    "note": "Core & Glute Stability"
+  },
+  {
+    "date": "2021-08-18",
+    "note": "Core & Glute Stability"
+  },
+  {
+    "date": "2021-08-19",
+    "note": "Core & Cardio Scorcher"
+  },
+  {
+    "date": "2021-08-20",
+    "note": "Full Body Cardio Burn"
+  },
+  {
+    "date": "2021-08-22",
+    "note": "Steady Strength & Power"
+  },
+  {
+    "date": "2021-08-23",
+    "note": "Full Body & Core Endurance"
+  },
+  {
+    "date": "2021-08-25",
+    "note": "Full Body Cardio Crush"
+  },
+  {
+    "date": "2021-08-28",
+    "note": "Ultimate Cardio Burn"
+  },
+  {
+    "date": "2021-08-30",
+    "note": "Leg Power-Up"
+  },
+  {
+    "date": "2021-09-01",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2021-09-04",
+    "note": "Upper Body Strength with HIT"
+  },
+  {
+    "date": "2021-09-05",
+    "note": "Fiery Cardio with Core"
+  },
+  {
+    "date": "2021-09-06",
+    "note": "Legs & Glutes HIT"
+  },
+  {
+    "date": "2021-09-09",
+    "note": "Speed & Strength Combo"
+  },
+  {
+    "date": "2021-09-15",
+    "note": "Max Cardio Burn"
+  },
+  {
+    "date": "2021-09-16",
+    "note": "Core & Cardio Combo"
+  },
+  {
+    "date": "2021-09-17",
+    "note": "Burn with Kirsty Godso; Speed & Strength Smash"
+  },
+  {
+    "date": "2021-09-25",
+    "note": "Lower-Body Burn 2"
+  },
+  {
+    "date": "2021-09-27",
+    "note": "Total Body Strength Essentials"
+  },
+  {
+    "date": "2021-09-28",
+    "note": "Strength & Core Foundations"
+  },
+  {
+    "date": "2021-09-30",
+    "note": "Push & Pull Basics; Leg & Glute Essentials"
+  },
+  {
+    "date": "2021-10-02",
+    "note": "Shoulder & Core Essentials"
+  },
+  {
+    "date": "2021-10-03",
+    "note": "Glute & Leg Strength"
+  },
+  {
+    "date": "2021-10-09",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2021-10-13",
+    "note": "Full Body Strength & HIT"
+  },
+  {
+    "date": "2021-10-15",
+    "note": "Slow Arm & Core Burn"
+  },
+  {
+    "date": "2021-10-16",
+    "note": "Glute, Leg & Core Strength"
+  },
+  {
+    "date": "2021-10-18",
+    "note": "Full Body Circuit"
+  },
+  {
+    "date": "2021-10-29",
+    "note": "Active Arms & Abs"
+  },
+  {
+    "date": "2021-10-30",
+    "note": "Full Body Fit"
+  },
+  {
+    "date": "2021-10-31",
+    "note": "Core & Legs Combo"
+  },
+  {
+    "date": "2021-11-01",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2021-11-02",
+    "note": "Kick Off with Betina Gozo; Max Out HIT"
+  },
+  {
+    "date": "2021-11-03",
+    "note": "Rise & Flow Yoga"
+  },
+  {
+    "date": "2021-11-10",
+    "note": "Breakthrough HIT & Flow 1"
+  },
+  {
+    "date": "2021-11-11",
+    "note": "20-Min Bodyweight Burn: Total Body"
+  },
+  {
+    "date": "2021-11-17",
+    "note": "Breakthrough HIT & Flow 2"
+  },
+  {
+    "date": "2021-11-19",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2021-11-21",
+    "note": "Breakthrough HIT & Flow 3"
+  },
+  {
+    "date": "2021-11-22",
+    "note": "Total-Body Blast 1"
+  },
+  {
+    "date": "2021-12-03",
+    "note": "Fluid Strength & Stability"
+  },
+  {
+    "date": "2021-12-13",
+    "note": "Cardio & Legs HIT"
+  },
+  {
+    "date": "2021-12-15",
+    "note": "Cardio & Core Burn"
+  },
+  {
+    "date": "2021-12-17",
+    "note": "Quick Core & Glutes"
+  },
+  {
+    "date": "2021-12-19",
+    "note": "Core & Glute Stability"
+  },
+  {
+    "date": "2021-12-20",
+    "note": "Core & Cardio Scorcher"
+  },
+  {
+    "date": "2021-12-21",
+    "note": "Full Body Cardio Burn; Gentle Yoga"
+  },
+  {
+    "date": "2021-12-23",
+    "note": "Steady Strength & Power"
+  },
+  {
+    "date": "2021-12-27",
+    "note": "Full Body & Core Endurance"
+  },
+  {
+    "date": "2021-12-29",
+    "note": "Full Body Cardio Crush"
+  },
+  {
+    "date": "2022-01-10",
+    "note": "Ultimate Cardio Burn"
+  },
+  {
+    "date": "2022-01-11",
+    "note": "Leg Power-Up"
+  },
+  {
+    "date": "2022-01-12",
+    "note": "NTC Workout"
+  },
+  {
+    "date": "2022-01-13",
+    "note": "Quick Full Body Burn"
+  },
+  {
+    "date": "2022-01-18",
+    "note": "Upper Body Strength with HIT"
+  },
+  {
+    "date": "2022-01-19",
+    "note": "Fiery Cardio with Core"
+  },
+  {
+    "date": "2022-01-21",
+    "note": "Wind-Down Yoga Flow"
+  },
+  {
+    "date": "2022-01-24",
+    "note": "Fiery Cardio with Core"
+  },
+  {
+    "date": "2022-01-25",
+    "note": "Legs & Glutes HIT"
+  },
+  {
+    "date": "2022-01-27",
+    "note": "Speed & Strength Combo"
+  },
+  {
+    "date": "2022-01-28",
+    "note": "Max Cardio Burn"
+  },
+  {
+    "date": "2022-01-29",
+    "note": "All-Out Shoulders & Arms"
+  },
+  {
+    "date": "2022-02-01",
+    "note": "Core & Cardio Combo"
+  },
+  {
+    "date": "2022-02-05",
+    "note": "Core & Cardio Combo"
+  },
+  {
+    "date": "2022-02-07",
+    "note": "Burn with Kirsty Godso; Speed & Strength Smash"
+  },
+  {
+    "date": "2022-02-08",
+    "note": "Upper-Body and Core Sizzler 1"
+  },
+  {
+    "date": "2022-02-09",
+    "note": "Lower-Body Burn 1"
+  },
+  {
+    "date": "2022-02-10",
+    "note": "Total-Body Blast 1"
+  },
+  {
+    "date": "2022-02-11",
+    "note": "Upper-Body and Core Sizzler 2"
+  },
+  {
+    "date": "2022-02-12",
+    "note": "Lower-Body Burn 2"
+  },
+  {
+    "date": "2022-02-14",
+    "note": "Total-Body Blast 2"
+  },
+  {
+    "date": "2022-02-16",
+    "note": "Upper-Body and Core Sizzler 3"
+  },
+  {
+    "date": "2022-02-17",
+    "note": "Lower-Body Burn 3"
+  },
+  {
+    "date": "2022-02-18",
+    "note": "Total-Body Blast 3"
+  },
+  {
+    "date": "2022-02-20",
+    "note": "Upper-Body and Core Sizzler 4"
+  },
+  {
+    "date": "2022-02-25",
+    "note": "Total-Body Blast 4"
+  },
+  {
+    "date": "2022-02-26",
+    "note": "Upper-Body and Core Sizzler 5"
+  },
+  {
+    "date": "2022-02-27",
+    "note": "Lower-Body Burn 5"
+  },
+  {
+    "date": "2022-03-02",
+    "note": "Total-Body Blast 5"
+  },
+  {
+    "date": "2022-03-04",
+    "note": "Upper-Body and Core Sizzler 6"
+  },
+  {
+    "date": "2022-03-07",
+    "note": "Lower-Body Burn 6"
+  },
+  {
+    "date": "2022-03-11",
+    "note": "Total-Body Blast 6"
+  },
+  {
+    "date": "2022-03-12",
+    "note": "Ignite & Inspire with Kirsty Godso"
+  },
+  {
+    "date": "2022-03-14",
+    "note": "Activation Station"
+  },
+  {
+    "date": "2022-03-17",
+    "note": "Cardio Kick"
+  },
+  {
+    "date": "2022-03-21",
+    "note": "Upper-Body and Core Sizzler 1"
+  },
+  {
+    "date": "2022-03-22",
+    "note": "Lower-Body Burn 1"
+  },
+  {
+    "date": "2022-03-23",
+    "note": "Total-Body Blast 1"
+  },
+  {
+    "date": "2022-03-24",
+    "note": "Upper-Body and Core Sizzler 2"
+  },
+  {
+    "date": "2022-03-25",
+    "note": "Lower-Body Burn 2; Lower-Body Burn 2"
+  },
+  {
+    "date": "2022-03-26",
+    "note": "Total-Body Blast 2"
+  },
+  {
+    "date": "2022-03-29",
+    "note": "Upper-Body and Core Sizzler 3"
+  },
+  {
+    "date": "2022-03-31",
+    "note": "Lower-Body Burn 3"
+  },
+  {
+    "date": "2022-04-01",
+    "note": "Total-Body Blast 3"
+  },
+  {
+    "date": "2022-04-03",
+    "note": "Upper-Body and Core Sizzler 4"
+  },
+  {
+    "date": "2022-04-04",
+    "note": "Lower-Body Burn 4"
+  },
+  {
+    "date": "2022-04-05",
+    "note": "Total-Body Blast 4"
+  },
+  {
+    "date": "2022-04-06",
+    "note": "Upper-Body and Core Sizzler 5"
+  },
+  {
+    "date": "2022-04-10",
+    "note": "Lower-Body Burn 5"
+  },
+  {
+    "date": "2022-04-13",
+    "note": "Total-Body Blast 5"
+  },
+  {
+    "date": "2022-04-18",
+    "note": "Upper-Body and Core Sizzler 6"
+  },
+  {
+    "date": "2022-04-21",
+    "note": "Lower-Body Burn 6"
+  },
+  {
+    "date": "2022-04-25",
+    "note": "Total-Body Blast 6"
+  },
+  {
+    "date": "2022-04-28",
+    "note": "Head to Toe HIT; Ignite & Inspire with Kirsty Godso"
+  },
+  {
+    "date": "2022-05-01",
+    "note": "Breakthrough HIT & Flow 1"
+  },
+  {
+    "date": "2022-05-04",
+    "note": "Upper Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2022-05-06",
+    "note": "Core & HIT Combo"
+  },
+  {
+    "date": "2022-05-12",
+    "note": "Upper Body Strength Breakthrough 2"
+  },
+  {
+    "date": "2022-05-17",
+    "note": "Breakthrough HIT & Flow 3"
+  },
+  {
+    "date": "2022-06-01",
+    "note": "Upper Body Strength with Eccentrics 1"
+  },
+  {
+    "date": "2022-06-11",
+    "note": "Pro Strength with Ryan Flaherty"
+  },
+  {
+    "date": "2022-06-12",
+    "note": "Lower Body Strength Breakthrough 1"
+  },
+  {
+    "date": "2022-06-16",
+    "note": "Ferocious 15"
+  },
+  {
+    "date": "2022-08-10",
+    "note": "Slim Chance 2.0"
+  },
+  {
+    "date": "2022-08-18",
+    "note": "10-Min HIT: Agility Blast"
+  },
+  {
+    "date": "2022-08-24",
+    "note": "Centre Out"
+  },
+  {
+    "date": "2022-09-17",
+    "note": "Kickboxing Fit"
+  },
+  {
+    "date": "2022-10-13",
+    "note": "Slow & Restorative Yoga; Active Recovery Yoga"
+  },
+  {
+    "date": "2022-10-22",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2022-11-11",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2022-11-17",
+    "note": "20-Min HIT: Upper-Body Strength"
+  },
+  {
+    "date": "2022-12-21",
+    "note": "Kickboxing Basics"
+  },
+  {
+    "date": "2023-01-02",
+    "note": "Power-Pumping Intervals"
+  },
+  {
+    "date": "2023-01-05",
+    "note": "Full Body Dumbbell Circuit"
+  },
+  {
+    "date": "2023-01-06",
+    "note": "Core Strength"
+  },
+  {
+    "date": "2023-01-09",
+    "note": "Back and Biceps Burnout"
+  },
+  {
+    "date": "2023-01-10",
+    "note": "Cut to the Core; Lower Body Build and Burn"
+  },
+  {
+    "date": "2023-01-11",
+    "note": "Cut to the Core"
+  },
+  {
+    "date": "2023-01-14",
+    "note": "No Speed Limit"
+  },
+  {
+    "date": "2023-01-17",
+    "note": "360 Degrees Stronger"
+  },
+  {
+    "date": "2023-01-18",
+    "note": "Upper Body Express"
+  },
+  {
+    "date": "2023-01-20",
+    "note": "Trunk and Branches"
+  },
+  {
+    "date": "2023-01-25",
+    "note": "Glutes to the Max"
+  },
+  {
+    "date": "2023-01-26",
+    "note": "Upper Body Sculpt"
+  },
+  {
+    "date": "2023-02-02",
+    "note": "Strength Progression; Leg and Glute Burner"
+  },
+  {
+    "date": "2023-02-13",
+    "note": "Max Out HIT"
+  },
+  {
+    "date": "2023-02-15",
+    "note": "Fluid Strength & Stability"
+  },
+  {
+    "date": "2023-02-23",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
+    "date": "2023-04-22",
+    "note": "Friday Evening Run"
+  },
+  {
+    "date": "2023-05-11",
+    "note": "Slow & Restorative Yoga"
+  },
+  {
     "date": "2023-05-16",
     "note": ""
   },
