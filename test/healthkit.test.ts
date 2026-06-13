@@ -454,6 +454,41 @@ describe('ingestHealthDataFromIssue', () => {
     expect(writtenFiles.has('./test-vault/healthkit/hr.json')).toBe(true);
   });
 
+  it('should fail instead of silently skipping invalid known metrics', async () => {
+    const issue: HealthDataIssue = {
+      title: 'HealthDataExport',
+      body: JSON.stringify({
+        data: {
+          metrics: [
+            {
+              name: 'heart_rate',
+              units: 'count/min',
+              data: [
+                {
+                  Avg: '66',
+                  date: '2025-10-27 00:00:00 +0530',
+                },
+              ],
+            },
+          ],
+        },
+      }),
+    };
+
+    const result = await ingestHealthDataFromIssue(
+      issue,
+      mockWriter,
+      mockReader,
+      mockCommenter,
+      './test-vault/healthkit'
+    );
+
+    expect(result.success).toBe(false);
+    expect(result.message).toContain('Invalid data for known metric heart_rate');
+    expect(writerCallCount).toBe(0);
+    expect(commentsPosted[0]).toContain('❌');
+  });
+
   it('should overwrite old data with new data for the same date across multiple ingestions', async () => {
     // First ingestion with initial data
     const firstIssue: HealthDataIssue = {

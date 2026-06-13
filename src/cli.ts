@@ -17,7 +17,7 @@ import {
 } from '@src/meditations';
 import { ingestHealthDataFromIssue } from '@src/healthkit';
 import { ingestLocationDataFromIssue } from '@src/location';
-import { createGitHubCommenter, closeGitHubIssue } from '@src/github';
+import { createGitHubCommenter } from '@src/github';
 
 // Update the value of monthly key results, on a daily basis
 program
@@ -291,17 +291,6 @@ program
           success: false,
           message: errorMsg,
         };
-      }
-
-      // Close the issue if processing was successful
-      if (result.success && githubToken && githubRepo && issueNumber) {
-        try {
-          await closeGitHubIssue(githubToken, githubRepo, issueNumber);
-          console.log('Issue closed successfully');
-        } catch (error) {
-          console.error('Failed to close issue:', error);
-          // Don't fail the whole process if closing fails
-        }
       }
 
       console.log(result.message);

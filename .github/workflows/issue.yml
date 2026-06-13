@@ -73,6 +73,18 @@ jobs:
           commit_author: '0x4444 <0x4444@users.noreply.github.com>'
           file_pattern: vault/*
 
+      - name: '✅ Close ingested issue'
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.update({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed'
+            });
+
       - name: '🏷️ Remove processing label'
         if: always()
         uses: actions/github-script@v7

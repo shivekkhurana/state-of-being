@@ -376,8 +376,10 @@ export async function processMetric(
   const validationResult = HealthMetricSchema.safeParse(metric);
   if (!validationResult.success) {
     return {
-      success: true, // Treat as success (skip gracefully)
-      message: `Skipping unknown metric: ${metric.name}`,
+      success: false,
+      message: `Invalid data for known metric ${metric.name}: ${validationResult.error.issues
+        .map((error) => `${error.path.join('.')}: ${error.message}`)
+        .join('; ')}`,
     };
   }
 
