@@ -10,5 +10,11 @@
     "type": "waist",
     "value": 86,
     "unit": "cm"
+  },
+  {
+    "date": "2026-06-28",
+    "type": "waist",
+    "value": 86.5,
+    "unit": "cm"
   }
 ]
