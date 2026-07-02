@@ -1,11 +1,6 @@
 #!/usr/bin/env bun
 
 import { program } from 'commander';
-import {
-  setCurrentValueOfWorkoutKeyResult,
-  createMonthlyWorkoutKeyResult,
-  saveWorkoutStatsToVault,
-} from '@src/workouts';
 import { getCurrentYear, getCurrentMonth } from '@src/time';
 import config from '@src/config';
 import {
@@ -19,39 +14,16 @@ import { ingestHealthDataFromIssue } from '@src/healthkit';
 import { ingestLocationDataFromIssue } from '@src/location';
 import { createGitHubCommenter } from '@src/github';
 
-// Update the value of monthly key results, on a daily basis
-program
-  .command('set-current-value-of-workout-key-result')
-  .option(
-    '-y, --year <year>',
-    'Year for the workout key result',
-    getCurrentYear().toString()
-  )
-  .option(
-    '-m, --month <month>',
-    'Month for the workout key result',
-    getCurrentMonth().toString()
-  )
-  .action(async (options) => {
-    try {
-      const { year, month } = options;
-      const result = await setCurrentValueOfWorkoutKeyResult(year, month);
-      console.log(result);
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  });
-
 program
   .command('set-current-value-of-meditations-key-result')
   .option(
     '-y, --year <year>',
-    'Year for the workout key result',
+    'Year for the meditation key result',
     getCurrentYear().toString()
   )
   .option(
     '-m, --month <month>',
-    'Month for the workout key result',
+    'Month for the meditation key result',
     getCurrentMonth().toString()
   )
   .action(async (options) => {
@@ -68,12 +40,12 @@ program
   .command('set-current-value-of-observations-key-result')
   .option(
     '-y, --year <year>',
-    'Year for the workout key result',
+    'Year for the observations key result',
     getCurrentYear().toString()
   )
   .option(
     '-m, --month <month>',
-    'Month for the workout key result',
+    'Month for the observations key result',
     getCurrentMonth().toString()
   )
   .action(async (options) => {
@@ -86,39 +58,17 @@ program
     }
   });
 
-// Create monthly key results for meditations, workouts and observations
-program
-  .command('create-monthly-workout-key-result')
-  .option(
-    '-y, --year <year>',
-    'Year for the workout key result',
-    getCurrentYear().toString()
-  )
-  .option(
-    '-m, --month <month>',
-    'Month for the workout key result',
-    getCurrentMonth().toString()
-  )
-  .action(async (options) => {
-    try {
-      const { year, month } = options;
-      const result = await createMonthlyWorkoutKeyResult(year, month);
-      console.log(result);
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  });
-
+// Create monthly key results for meditations and observations
 program
   .command('create-monthly-meditations-key-result')
   .option(
     '-y, --year <year>',
-    'Year for the workout key result',
+    'Year for the meditation key result',
     getCurrentYear().toString()
   )
   .option(
     '-m, --month <month>',
-    'Month for the workout key result',
+    'Month for the meditation key result',
     getCurrentMonth().toString()
   )
   .action(async (options) => {
@@ -135,12 +85,12 @@ program
   .command('create-monthly-observations-key-result')
   .option(
     '-y, --year <year>',
-    'Year for the workout key result',
+    'Year for the observations key result',
     getCurrentYear().toString()
   )
   .option(
     '-m, --month <month>',
-    'Month for the workout key result',
+    'Month for the observations key result',
     getCurrentMonth().toString()
   )
   .action(async (options) => {
@@ -152,16 +102,6 @@ program
       console.error('An error occurred:', error);
     }
   });
-
-program.command('save-workout-stats-to-vault').action(async () => {
-  try {
-    const savePath = config.workoutStatsSavePath;
-    const res = await saveWorkoutStatsToVault(savePath);
-    console.log(res);
-  } catch (error) {
-    console.log(error);
-  }
-});
 
 // Aggregates are computed for month, but should be written daily so it stays updated
 program

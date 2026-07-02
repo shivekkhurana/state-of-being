@@ -21,7 +21,6 @@ jobs:
 
     env:
       NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-      GOOGLE_SHEETS_API_KEY: ${{ secrets.GOOGLE_SHEETS_API_KEY }}
 
     steps:
       - name: '📦 Checkout'
@@ -34,14 +33,6 @@ jobs:
 
       - name: '✅ Install dependencies'
         run: bun install
-
-      - name: '🐒 Fetch workouts value and set on Notion with given year and month'
-        if: "${{ github.event.inputs.year != '' && github.event.inputs.month != '' }}"
-        run: bun run cli set-current-value-of-workout-key-result -y ${{ github.event.inputs.year }} -m ${{ github.event.inputs.month }}
-
-      - name: '‍🐒 Fetch workouts value and set on Notion with current year and month'
-        if: "${{ github.event.inputs.year == '' && github.event.inputs.month == '' }}"
-        run: bun run cli set-current-value-of-workout-key-result
 
       - name: '🧘‍♂️ Fetch meditations value and set on Notion with given year and month'
         if: "${{ github.event.inputs.year != '' && github.event.inputs.month != '' }}"
@@ -58,9 +49,6 @@ jobs:
       - name: '‍👀 Fetch observations value and set on Notion with current year and month'
         if: "${{ github.event.inputs.year == '' && github.event.inputs.month == '' }}"
         run: bun run cli set-current-value-of-observations-key-result
-
-      - name: '📃 Fetch workouts data and write to vault'
-        run: bun run cli save-workout-stats-to-vault
 
       - name: '🕊️ Aggregate monthly meditation data and write to vault for given year and month'
         if: "${{ github.event.inputs.year != '' && github.event.inputs.month != '' }}"

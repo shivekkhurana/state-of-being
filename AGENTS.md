@@ -2,7 +2,7 @@
 
 ## Recording Workouts
 
-- Workouts v2 live in `vault/workoutv2.json`.
+- Workouts live in `vault/workouts.json`.
 - Each workout entry must be an object with exactly two keys:
   - `date`: a `YYYY-MM-DD` string.
   - `note`: a string. Use `""` when there is no note.
@@ -10,14 +10,13 @@
 - Add workouts with the helper script:
 
   ```sh
-  node scripts/add-workout-v2.js YYYY-MM-DD "optional note"
+  node scripts/add-workout.js YYYY-MM-DD "optional note"
   ```
 
 - If the user says they worked out today, use the current local date unless they specify another date.
 - If the user gives a relative date such as yesterday or tomorrow, convert it to an explicit `YYYY-MM-DD` date before recording it.
-- Do not manually edit `vault/workoutv2.json` for normal workout additions unless the helper script is unavailable or broken.
+- Do not manually edit `vault/workouts.json` for normal workout additions unless the helper script is unavailable or broken.
 - After recording a workout, commit the changed workout data when appropriate, then run `git push`.
-- Preserve the old workout aggregate file at `vault/workouts.json`; do not migrate or overwrite it during normal workout recording.
 
 ## Recording Measurements
 

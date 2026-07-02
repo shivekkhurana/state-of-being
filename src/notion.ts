@@ -28,7 +28,6 @@ enum Selects {
 
 enum WindmillStateContains {
   AUTO_MEDITATION = "AutoMeditationKeyResult",
-  AUTO_WORKOUTS = "AutoWorkoutKeyResult",
   AUTO_OBSERVATIONS = "AutoObservationsKeyResult",
   HELLO_WORLD = "HelloWorld",
 }
@@ -300,7 +299,7 @@ async function createMonthlyKeyResultPage(
   title: string,
   targetValue: number,
   relatedObjectives: string[],
-  // This is the type of Key Result we are creating: Workout, Meditation or Observations
+  // This is the type of Key Result we are creating: Meditation or Observations
   forWindmillState: WindmillStateContains,
   emoji: string,
   status: Statuses,

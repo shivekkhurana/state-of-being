@@ -3,12 +3,13 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const workoutPath = path.join(__dirname, "..", "vault", "workoutv2.json");
+const workoutPath =
+  process.env.WORKOUTS_PATH || path.join(__dirname, "..", "vault", "workouts.json");
 const [dateArg, ...noteParts] = process.argv.slice(2);
 const note = noteParts.join(" ").trim();
 
 function usage() {
-  console.error("Usage: node scripts/add-workout-v2.js YYYY-MM-DD [note]");
+  console.error("Usage: node scripts/add-workout.js YYYY-MM-DD [note]");
   process.exit(1);
 }
 
