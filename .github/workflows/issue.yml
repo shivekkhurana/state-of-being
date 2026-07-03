@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: '📦 Checkout'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: '🏷️ Add processing label'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             github.rest.issues.addLabels({
@@ -31,7 +31,7 @@ jobs:
             })
 
       - name: '💬 Comment workflow status'
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const workflowRunUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
@@ -43,7 +43,7 @@ jobs:
             })
 
       - name: '🍔 Set up Bun'
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
@@ -65,7 +65,7 @@ jobs:
 
       - name: '🗄️ Commit vault back to repo'
         if: success()
-        uses: stefanzweifel/git-auto-commit-action@v4.15.4
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: '🤖 Save data to vault'
           commit_user_name: '0x4444'
@@ -75,7 +75,7 @@ jobs:
 
       - name: '✅ Close ingested issue'
         if: success()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             await github.rest.issues.update({
@@ -87,7 +87,7 @@ jobs:
 
       - name: '🏷️ Remove processing label'
         if: always()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             try {
@@ -108,7 +108,7 @@ jobs:
     needs: [process-issue]
     if: success()
     steps:
-      - uses: peter-evans/repository-dispatch@v2
+      - uses: peter-evans/repository-dispatch@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}

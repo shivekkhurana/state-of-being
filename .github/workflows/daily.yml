@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - name: '📦 Checkout'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
 
       - name: '🍔 Set up Bun'
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
@@ -59,7 +59,7 @@ jobs:
         run: bun run cli save-monthly-meditation-aggregates-to-vault
 
       - name: '🗄️ Commit vault back to repo'
-        uses: stefanzweifel/git-auto-commit-action@v4.15.4
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: '🤖 Save data to vault'
           commit_user_name: '0x4444'

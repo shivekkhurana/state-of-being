@@ -15,6 +15,7 @@
 
 - If the user says they worked out today, use the current local date unless they specify another date.
 - If the user gives a relative date such as yesterday or tomorrow, convert it to an explicit `YYYY-MM-DD` date before recording it.
+- If workout notes are provided in any language other than English, translate them to English before saving.
 - Do not manually edit `vault/workouts.json` for normal workout additions unless the helper script is unavailable or broken.
 - After recording a workout, commit the changed workout data when appropriate, then run `git push`.
 
@@ -53,6 +54,7 @@
   - Snacks: small meals between main meals
   - Dinner: evening/night meals
 - Preserve the stated foods and quantities as closely as possible.
+- If diet notes are provided in any language other than English, translate them to English before saving.
 - If a stated ingredient or prepared item can refer to meaningfully different versions, such as sweet vs salty lassi, ask the user to confirm which version before estimating macros.
 - Estimate calories, carbs, protein, and fat when exact nutrition data is not provided.
 - When estimating macros, be explicit in the item notes if an estimate depends on assumptions such as recipe, portion size, oil/ghee, sugar, brand, or preparation style.
