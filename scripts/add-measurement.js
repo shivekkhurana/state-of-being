@@ -7,6 +7,7 @@ const measurementsPath = path.join(__dirname, "..", "vault", "measurements.json"
 const [dateArg, typeArg, valueArg, unitArg] = process.argv.slice(2);
 
 const measurementTypes = {
+  weight: ["kg", "lb"],
   waist: ["cm", "in"],
   chest: ["cm", "in"],
   hips: ["cm", "in"],

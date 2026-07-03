@@ -58,5 +58,11 @@
     "type": "waist",
     "value": 87,
     "unit": "cm"
+  },
+  {
+    "date": "2026-07-03",
+    "type": "weight",
+    "value": 67,
+    "unit": "kg"
   }
 ]
