@@ -53,6 +53,7 @@
   - Snacks: small meals between main meals
   - Dinner: evening/night meals
 - Preserve the stated foods and quantities as closely as possible.
+- If a stated ingredient or prepared item can refer to meaningfully different versions, such as sweet vs salty lassi, ask the user to confirm which version before estimating macros.
 - Estimate calories, carbs, protein, and fat when exact nutrition data is not provided.
 - When estimating macros, be explicit in the item notes if an estimate depends on assumptions such as recipe, portion size, oil/ghee, sugar, brand, or preparation style.
 - On every new meal entry, update the daily macro totals in frontmatter.
@@ -64,10 +65,7 @@ Use this frontmatter shape:
 
 ```yaml
 ---
-type: diet
 date: YYYY-MM-DD
-created:
-hidden: false
 diet_total_calories: 0
 diet_total_carbs_g: 0
 diet_total_protein_g: 0
