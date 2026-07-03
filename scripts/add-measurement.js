@@ -9,7 +9,10 @@ const [dateArg, typeArg, valueArg, unitArg] = process.argv.slice(2);
 const measurementTypes = {
   waist: ["cm", "in"],
   belly: ["cm", "in"],
+  chest: ["cm", "in"],
+  hips: ["cm", "in"],
   shoulders: ["cm", "in"],
+  neck: ["cm", "in"],
   thighs: ["cm", "in"],
   calves: ["cm", "in"],
   ldl: ["mg/dL", "mmol/L"],

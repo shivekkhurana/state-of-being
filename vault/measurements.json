@@ -16,5 +16,47 @@
     "type": "waist",
     "value": 86.5,
     "unit": "cm"
+  },
+  {
+    "date": "2026-07-03",
+    "type": "calves",
+    "value": 36,
+    "unit": "cm"
+  },
+  {
+    "date": "2026-07-03",
+    "type": "chest",
+    "value": 92,
+    "unit": "cm"
+  },
+  {
+    "date": "2026-07-03",
+    "type": "hips",
+    "value": 93,
+    "unit": "cm"
+  },
+  {
+    "date": "2026-07-03",
+    "type": "neck",
+    "value": 37,
+    "unit": "cm"
+  },
+  {
+    "date": "2026-07-03",
+    "type": "shoulders",
+    "value": 103,
+    "unit": "cm"
+  },
+  {
+    "date": "2026-07-03",
+    "type": "thighs",
+    "value": 57,
+    "unit": "cm"
+  },
+  {
+    "date": "2026-07-03",
+    "type": "waist",
+    "value": 87,
+    "unit": "cm"
   }
 ]
