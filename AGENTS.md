@@ -47,6 +47,9 @@
 - Diet notes use `type: diet`.
 - Filename format: `vault/diet-logs/YYYY-MM-DD_diet_log.md`.
 - Use the current local date unless the user says the meal belongs to a different date.
+- Each food row must include the actual eating timestamp in GMT/UTC as an ISO 8601 string, such as `2026-07-04T08:30:00Z`.
+- If the user says they ate something now or today without giving a time, use the current local date and time, then convert it to GMT/UTC for the row.
+- If the user gives a local eating time without a timezone, interpret it in the current local timezone and convert it to GMT/UTC before saving.
 - If a diet note already exists for that date, update the existing note instead of creating a new one.
 - If the user names the meal section, use that section. Otherwise infer the section from the local time:
   - Breakfast: morning meals
@@ -84,23 +87,23 @@ Use these sections:
 
 ## Breakfast
 
-| Item | Quantity | Calories | Carbs | Protein | Fat | Notes |
-| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Timestamp (GMT) | Item | Quantity | Calories | Carbs | Protein | Fat | Notes |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
 
 ## Lunch
 
-| Item | Quantity | Calories | Carbs | Protein | Fat | Notes |
-| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Timestamp (GMT) | Item | Quantity | Calories | Carbs | Protein | Fat | Notes |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
 
 ## Snacks
 
-| Item | Quantity | Calories | Carbs | Protein | Fat | Notes |
-| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Timestamp (GMT) | Item | Quantity | Calories | Carbs | Protein | Fat | Notes |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
 
 ## Dinner
 
-| Item | Quantity | Calories | Carbs | Protein | Fat | Notes |
-| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Timestamp (GMT) | Item | Quantity | Calories | Carbs | Protein | Fat | Notes |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
 ```
 
 ### Diet Macro Rules
