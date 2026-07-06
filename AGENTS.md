@@ -119,6 +119,27 @@ Use these sections:
 
 - Use a short one-line subject.
 - Start the subject with an emoji, then a space, then a Title Case imperative phrase.
+- Before committing non-routine changes, check recent history and staged changes:
+
+  ```sh
+  git log --oneline -30
+  git status
+  git diff --staged
+  ```
+
+- Choose the emoji from the primary change type. Common patterns:
+  - `🤖` automated saves or vault data updates.
+  - `🛎️` workflow, deployment, or CI/CD changes.
+  - `🔗` links, connections, or integrations.
+  - `🗑️` deletions or removals.
+  - `❤️` health metrics or new tracking features.
+  - `🧹` cleanup or refactoring.
+  - `🐞` bug fixes.
+  - `🪵` logging or diagnostics.
+  - `📍` location-related changes.
+  - `📋` validation, checks, or configuration.
+  - `📝` documentation updates.
+  - `🔧` tooling or build-system changes.
 - Prefer the existing data-save message for routine vault updates:
 
   ```text
