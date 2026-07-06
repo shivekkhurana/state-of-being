@@ -2,7 +2,7 @@
 
 # Introduction
 
-**State of Being** is a collection of scripts and tasks designed to gather and quantify my current state and goals. 📊
+**State of Being** is a collection of data pipelines and CLI tools designed to gather and quantify my current state and goals. 📊
 
 At an atomic level, it monitors aspects like my sleep patterns, awareness, workouts, and meditation efficiency. On a more abstract level, it links my daily tasks [कर्म](https://www.rekhtadictionary.com/meaning-of-karm#:~:text=act%2C%20deed%2C%20religious%20act%2C%20destiny) to my life's vision.
 Through this project, my aim is to track and enhance personal growth in a manner akin to tracking the development of a product. 🌱
@@ -33,3 +33,10 @@ The base url is:`https://shivekkhurana.github.io/state-of-being/`
 ## Dashboard
 
 A public dashboard is in under construction and will be available at [shivekkhurana.com/state-of-being](https://shivekkhurana.com/state-of-being)
+
+## CLI
+
+```sh
+bun src/cli.ts workout add YYYY-MM-DD "optional note"
+bun src/cli.ts measurement add YYYY-MM-DD TYPE VALUE UNIT
+```

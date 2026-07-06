@@ -7,16 +7,16 @@
   - `date`: a `YYYY-MM-DD` string.
   - `note`: a string. Use `""` when there is no note.
 - Before recording a workout, always run `git pull origin master`.
-- Add workouts with the helper script:
+- Add workouts with the CLI:
 
   ```sh
-  node scripts/add-workout.js YYYY-MM-DD "optional note"
+  bun src/cli.ts workout add YYYY-MM-DD "optional note"
   ```
 
 - If the user says they worked out today, use the current local date unless they specify another date.
 - If the user gives a relative date such as yesterday or tomorrow, convert it to an explicit `YYYY-MM-DD` date before recording it.
 - If workout notes are provided in any language other than English, translate them to English before saving.
-- Do not manually edit `vault/workouts.json` for normal workout additions unless the helper script is unavailable or broken.
+- Do not manually edit `vault/workouts.json` for normal workout additions unless the CLI is unavailable or broken.
 - After recording a workout, commit the changed workout data when appropriate, then run `git push`.
 
 ## Recording Measurements
@@ -24,20 +24,20 @@
 - Measurements live in `vault/measurements.json`.
 - Each measurement entry must be a flat object with exactly four keys:
   - `date`: a `YYYY-MM-DD` string.
-  - `type`: a measurement type defined in `scripts/add-measurement.js`.
+  - `type`: a measurement type defined in `src/measurements.ts`.
   - `value`: a non-negative number.
-  - `unit`: a unit allowed for the selected measurement type in `scripts/add-measurement.js`.
+  - `unit`: a unit allowed for the selected measurement type in `src/measurements.ts`.
 - The combination of `date` and `type` is unique. Multiple different measurement types can be recorded for the same date.
 - Before recording a measurement, always run `git pull origin master`.
-- Add or update measurements with the helper script:
+- Add or update measurements with the CLI:
 
   ```sh
-  node scripts/add-measurement.js YYYY-MM-DD TYPE VALUE UNIT
+  bun src/cli.ts measurement add YYYY-MM-DD TYPE VALUE UNIT
   ```
 
 - If the user says the measurement was taken today, use the current local date unless they specify another date.
 - If the user gives a relative date such as yesterday or tomorrow, convert it to an explicit `YYYY-MM-DD` date before recording it.
-- Do not manually edit `vault/measurements.json` for normal measurement additions unless the helper script is unavailable or broken.
+- Do not manually edit `vault/measurements.json` for normal measurement additions unless the CLI is unavailable or broken.
 - After recording a measurement, commit the changed measurement data when appropriate, then run `git push`.
 
 ## Recording Diet Logs

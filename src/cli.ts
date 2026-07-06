@@ -6,6 +6,46 @@ import { ingestHealthDataFromIssue } from '@src/healthkit';
 import { ingestLocationDataFromIssue } from '@src/location';
 import { createGitHubCommenter } from '@src/github';
 import { generateDietMacrosIndex } from '@src/diet';
+import { addMeasurement, measurementTypes } from '@src/measurements';
+import { addWorkout } from '@src/workouts';
+
+program
+  .name('bun src/cli.ts')
+  .description('Manage the state-of-being vault');
+
+program
+  .command('workout')
+  .description('Manage workout logs')
+  .command('add')
+  .argument('<date>', 'Workout date in YYYY-MM-DD format')
+  .argument('[note...]', 'Optional workout note')
+  .action(async (date: string, noteParts: string[]) => {
+    try {
+      const result = await addWorkout(date, noteParts.join(' '));
+      console.log(result.message);
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : error);
+      process.exit(1);
+    }
+  });
+
+program
+  .command('measurement')
+  .description('Manage measurement logs')
+  .command('add')
+  .argument('<date>', 'Measurement date in YYYY-MM-DD format')
+  .argument('<type>', `Measurement type: ${Object.keys(measurementTypes).join(', ')}`)
+  .argument('<value>', 'Non-negative numeric value')
+  .argument('<unit>', 'Unit allowed for the selected measurement type')
+  .action(async (date: string, type: string, value: string, unit: string) => {
+    try {
+      const result = await addMeasurement(date, type, value, unit);
+      console.log(result.message);
+    } catch (error) {
+      console.error(error instanceof Error ? error.message : error);
+      process.exit(1);
+    }
+  });
 
 program.command('generate-diet-macros-index').action(async () => {
   try {
