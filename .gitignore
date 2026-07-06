@@ -21,3 +21,4 @@ pom.xml.asc
 
 .env
 out/
+vault/macros.json

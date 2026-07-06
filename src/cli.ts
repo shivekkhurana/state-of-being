@@ -1,135 +1,21 @@
 #!/usr/bin/env bun
 
 import { program } from 'commander';
-import { getCurrentYear, getCurrentMonth } from '@src/time';
 import config from '@src/config';
-import {
-  saveMeditationAggregatesToVault,
-  createMonthlyObservationsKeyResult,
-  createMonthlyMeditationsKeyResult,
-  setCurrentValueOfMeditationsKeyResult,
-  setCurrentValueOfObservationsKeyResult,
-} from '@src/meditations';
 import { ingestHealthDataFromIssue } from '@src/healthkit';
 import { ingestLocationDataFromIssue } from '@src/location';
 import { createGitHubCommenter } from '@src/github';
+import { generateDietMacrosIndex } from '@src/diet';
 
-program
-  .command('set-current-value-of-meditations-key-result')
-  .option(
-    '-y, --year <year>',
-    'Year for the meditation key result',
-    getCurrentYear().toString()
-  )
-  .option(
-    '-m, --month <month>',
-    'Month for the meditation key result',
-    getCurrentMonth().toString()
-  )
-  .action(async (options) => {
-    try {
-      const { year, month } = options;
-      const result = await setCurrentValueOfMeditationsKeyResult(year, month);
-      console.log(result);
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  });
-
-program
-  .command('set-current-value-of-observations-key-result')
-  .option(
-    '-y, --year <year>',
-    'Year for the observations key result',
-    getCurrentYear().toString()
-  )
-  .option(
-    '-m, --month <month>',
-    'Month for the observations key result',
-    getCurrentMonth().toString()
-  )
-  .action(async (options) => {
-    try {
-      const { year, month } = options;
-      const result = await setCurrentValueOfObservationsKeyResult(year, month);
-      console.log(result);
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  });
-
-// Create monthly key results for meditations and observations
-program
-  .command('create-monthly-meditations-key-result')
-  .option(
-    '-y, --year <year>',
-    'Year for the meditation key result',
-    getCurrentYear().toString()
-  )
-  .option(
-    '-m, --month <month>',
-    'Month for the meditation key result',
-    getCurrentMonth().toString()
-  )
-  .action(async (options) => {
-    try {
-      const { year, month } = options;
-      const result = await createMonthlyMeditationsKeyResult(year, month);
-      console.log(result);
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  });
-
-program
-  .command('create-monthly-observations-key-result')
-  .option(
-    '-y, --year <year>',
-    'Year for the observations key result',
-    getCurrentYear().toString()
-  )
-  .option(
-    '-m, --month <month>',
-    'Month for the observations key result',
-    getCurrentMonth().toString()
-  )
-  .action(async (options) => {
-    try {
-      const { year, month } = options;
-      const result = await createMonthlyObservationsKeyResult(year, month);
-      console.log(result);
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  });
-
-// Aggregates are computed for month, but should be written daily so it stays updated
-program
-  .command('save-monthly-meditation-aggregates-to-vault')
-  .option(
-    '-y, --year <year>',
-    'Year for which to compute aggregates',
-    getCurrentYear().toString()
-  )
-  .option(
-    '-m, --month <month>',
-    'Month for which to compute aggregates',
-    getCurrentMonth().toString()
-  )
-  .action(async (options: { year?: number; month?: number }) => {
-    try {
-      const { year, month } = options;
-      const result = await saveMeditationAggregatesToVault(
-        config.meditationAggregatesSavePath,
-        config.NOTION_TOKEN,
-        month,
-        year
-      );
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+program.command('generate-diet-macros-index').action(async () => {
+  try {
+    const result = await generateDietMacrosIndex();
+    console.log(result);
+  } catch (error) {
+    console.error('An error occurred:', error);
+    process.exit(1);
+  }
+});
 
 program
   .command('process-issue')
