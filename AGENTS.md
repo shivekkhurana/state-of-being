@@ -51,7 +51,7 @@
 - If the user says they ate something now or today without giving a time, use the current local date and time, then convert it to GMT/UTC for the row.
 - If the user gives a local eating time without a timezone, interpret it in the current local timezone and convert it to GMT/UTC before saving.
 - If a diet note already exists for that date, update the existing note instead of creating a new one.
-- If the user names the meal section, use that section. Otherwise infer the section from the local time:
+- If the user names the meal section, use that section. Otherwise infer the section from the local time (do not ask the user):
   - Breakfast: morning meals
   - Lunch: midday/afternoon meals
   - Snacks: small meals between main meals
