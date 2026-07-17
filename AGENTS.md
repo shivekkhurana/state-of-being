@@ -63,6 +63,7 @@
 - When estimating macros, be explicit in the item notes if an estimate depends on assumptions such as recipe, portion size, oil/ghee, sugar, brand, or preparation style.
 - On every new meal entry, update the daily macro totals in frontmatter.
 - Do not overwrite existing meal rows unless the user is correcting a previous entry.
+- After logging a diet entry, always output the macros (calories, carbs, protein, fat) for the logged items to the user.
 
 ### Diet Frontmatter
 
