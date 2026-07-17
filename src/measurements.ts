@@ -1,5 +1,6 @@
 export const measurementTypes = {
   weight: ["kg", "lb"],
+  belly: ["cm", "in"],
   waist: ["cm", "in"],
   chest: ["cm", "in"],
   hips: ["cm", "in"],

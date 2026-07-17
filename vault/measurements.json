@@ -1,19 +1,19 @@
 [
   {
     "date": "2026-06-05",
-    "type": "waist",
+    "type": "belly",
     "value": 89,
     "unit": "cm"
   },
   {
     "date": "2026-06-20",
-    "type": "waist",
+    "type": "belly",
     "value": 86,
     "unit": "cm"
   },
   {
     "date": "2026-06-28",
-    "type": "waist",
+    "type": "belly",
     "value": 86.5,
     "unit": "cm"
   },
@@ -55,7 +55,7 @@
   },
   {
     "date": "2026-07-03",
-    "type": "waist",
+    "type": "belly",
     "value": 87,
     "unit": "cm"
   },
@@ -67,7 +67,7 @@
   },
   {
     "date": "2026-07-08",
-    "type": "waist",
+    "type": "belly",
     "value": 87,
     "unit": "cm"
   },
@@ -103,7 +103,7 @@
   },
   {
     "date": "2026-07-10",
-    "type": "waist",
+    "type": "belly",
     "value": 86.5,
     "unit": "cm"
   },
@@ -139,7 +139,7 @@
   },
   {
     "date": "2026-07-17",
-    "type": "waist",
+    "type": "belly",
     "value": 85.5,
     "unit": "cm"
   },
