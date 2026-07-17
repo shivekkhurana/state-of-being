@@ -19,6 +19,12 @@
   },
   {
     "date": "2026-07-03",
+    "type": "belly",
+    "value": 87,
+    "unit": "cm"
+  },
+  {
+    "date": "2026-07-03",
     "type": "calves",
     "value": 36,
     "unit": "cm"
@@ -55,12 +61,6 @@
   },
   {
     "date": "2026-07-03",
-    "type": "belly",
-    "value": 87,
-    "unit": "cm"
-  },
-  {
-    "date": "2026-07-03",
     "type": "weight",
     "value": 67,
     "unit": "kg"
@@ -76,6 +76,12 @@
     "type": "weight",
     "value": 65,
     "unit": "kg"
+  },
+  {
+    "date": "2026-07-10",
+    "type": "belly",
+    "value": 86.5,
+    "unit": "cm"
   },
   {
     "date": "2026-07-10",
@@ -103,15 +109,15 @@
   },
   {
     "date": "2026-07-10",
-    "type": "belly",
-    "value": 86.5,
-    "unit": "cm"
-  },
-  {
-    "date": "2026-07-10",
     "type": "weight",
     "value": 64,
     "unit": "kg"
+  },
+  {
+    "date": "2026-07-17",
+    "type": "belly",
+    "value": 85.5,
+    "unit": "cm"
   },
   {
     "date": "2026-07-17",
@@ -139,8 +145,8 @@
   },
   {
     "date": "2026-07-17",
-    "type": "belly",
-    "value": 85.5,
+    "type": "waist",
+    "value": 82.5,
     "unit": "cm"
   },
   {
