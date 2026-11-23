@@ -228,5 +228,10 @@
     "date": "2026-08-30",
     "city": "New Delhi",
     "country": "India"
+  },
+  {
+    "date": "2026-11-23",
+    "city": "",
+    "country": ""
   }
 ]
